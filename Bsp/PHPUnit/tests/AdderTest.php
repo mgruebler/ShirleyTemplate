@@ -2,9 +2,9 @@
 // »phpunit test« to call all Tests: starting in
 // working-directory ShirleyTemplate. (or using plugin,
 // or »Run«/»External Tools«.
-require_once 'PHPUnit/Framework.php';
+// require_once 'PHPUnit/Framework.php';
 
-require_once 'Adder.php';
+require_once (dirname(__FILE__) . '\..\Adder.php'); // example for relative path
 
 /**
  * Test class for Adder.
