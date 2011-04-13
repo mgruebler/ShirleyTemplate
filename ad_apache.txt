@@ -1,0 +1,14 @@
+In httpd.conf:
+---SCHNIPP---
+DocumentRoot "/usr/local/www/apache22/ShirleyTemplate/ShirleyTemplate/public"
+
+<Directory "/usr/local/www/apache22/ShirleyTemplate/ShirleyTemplate/public">
+ Options Indexes FollowSymLinks
+
+ # "all" so that .htaccess can insert rewrite-rules:
+ AllowOverride all
+
+ Order allow,deny
+ Allow from all  
+</Directory>
+---schnapp---
