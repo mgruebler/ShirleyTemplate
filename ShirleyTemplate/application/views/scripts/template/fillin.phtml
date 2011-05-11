@@ -1,3 +1,13 @@
-hallo
 <?php
-?>
+ $tp_id=$this->tp_id;
+ echo "<p>Id=".$tp_id."</p>";
+ if($this->tp_record === NULL)
+ {
+ 	echo "not found";
+ }
+ else
+ {
+	//echo "<pre>".print_r($this->tp_record,true)."</pre>";
+	echo "Template-name: »".$this->escape($this->tp_record->name)."«";
+ }
+  ?>

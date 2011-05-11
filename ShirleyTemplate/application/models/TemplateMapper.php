@@ -57,5 +57,23 @@ class Application_Model_TemplateMapper
         }
         return $templates;
     }
+
+    public function fetchWithId($tp_id)
+    {
+    	$templateTable = $this->getDbTable();
+    	
+    	$result = $templateTable->fetchAll("ID=".$tp_id);
+        
+        $templates = array();
+    	foreach ($result as $row) {
+            $template = new Application_Model_Template();
+            $template->setID($row->ID)
+                  ->setName($row->name)
+                  ->setUserID($row->userID)
+                  ->setType($row->type);
+            $templates[] = $template;
+        }
+        return $templates[0]; // ID is primary key => unique.
+    }
 }
 

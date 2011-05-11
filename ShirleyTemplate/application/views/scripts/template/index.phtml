@@ -4,7 +4,7 @@
 <dl>
    
     <?php foreach ($this->templates as $template): ?>
-    <dd><a href="<?php echo $this->url(array('controller'=>'template','action'=>'fillIn','templateid'=>$this->escape($template->ID)));
+    <dd><a href="<?php echo $this->url(array('controller'=>'template','action'=>'fillin','templateid'=>$this->escape($template->ID)));
     	?>"> <?php echo $this->escape($template->name) ?> </a> </dd>
     <?php endforeach ?>
 </dl>

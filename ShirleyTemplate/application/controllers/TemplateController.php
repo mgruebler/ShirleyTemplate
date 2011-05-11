@@ -17,7 +17,11 @@ class TemplateController extends Zend_Controller_Action
 
     public function fillinAction()
     {
-    	echo "ho";
+    	$tp_id = $this->_getParam('templateid');
+    	$this->view->tp_id = $tp_id;
+    	
+    	$templates = new Application_Model_TemplateMapper();
+    	$this->view->tp_record = $templates->fetchWithId($tp_id);
     }
 }
 
