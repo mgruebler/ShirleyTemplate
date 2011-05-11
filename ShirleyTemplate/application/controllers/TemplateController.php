@@ -15,5 +15,9 @@ class TemplateController extends Zend_Controller_Action
     	$this->view->templates = $templates->fetchAll();
     }
 
+    public function fillinAction()
+    {
+    	echo "ho";
+    }
 }
 
