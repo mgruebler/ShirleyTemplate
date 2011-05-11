@@ -1,0 +1,254 @@
+%% Latest change: Mon Dez 20 17:02:02 CET 2010
+%%%% === Disclaimer: =======================================================
+%% created by
+%%
+%%      #vkNAME
+%%
+%% using grml GNU/Linux, vim & LaTeX 2e
+%%
+%doc% 
+%doc% \section{How to use this \LaTeX{} document template}
+%doc% 
+%doc% This \LaTeX{} document template from
+%doc% \vkLaT\footnote{\url{http://LaTeX.TUGraz.at}} is based on \vkabk{KOMA}
+%doc% script\footnote{\url{http://komascript.de/}}. It provides an easy to use and
+%doc% easy to modify template. All settings are documented and many references to
+%doc% additional information sources are given.
+%doc% 
+%doc% \subsection{How to compile this document}
+%doc% 
+%doc% \subsubsection{\textsc{GNU}/Linux, \textsc{OS~X}, \textsc{UNIX}, Cygwin}
+%doc% 
+%doc% If your system provides \vkabk{GNU}
+%doc% make\footnote{\url{https://secure.wikimedia.org/wikipedia/en/wiki/Make\_\%28software\%29}},
+%doc% it is very easy to compile this document:
+%doc% 
+%doc% \begin{verbatim}
+%doc% make pdf
+%doc% \end{verbatim}
+%doc% 
+%doc% You can get a list of all other commands provided by the Makefile by invoking
+%doc% \texttt{make help}.
+%doc% 
+%doc% \subsubsection{All other systems including Microsoft Windows}
+%doc% 
+%doc% If your system does not provide \vkabk{GNU} make or you do not want to use \vkabk{GNU} make,
+%doc% you can compile this document using the usual method with pdf\LaTeX{}:
+%doc% 
+%doc% \begin{verbatim}
+%doc% pdflatex main.tex
+%doc% pdflatex main.tex
+%doc% \end{verbatim}
+%doc% 
+%doc% If you are using \textsc{Bib}\TeX{} you have to add its commands such as:
+%doc% 
+%doc% \begin{verbatim}
+%doc% pdflatex main.tex
+%doc% bibtex main
+%doc% pdflatex main.tex
+%doc% pdflatex main.tex
+%doc% \end{verbatim}
+%doc% 
+%doc% Addidional commands are required for packages like \texttt{makeindex} and so
+%doc% forth.
+%doc% 
+%doc% \subsection{How to get rid of the template documentation}
+%doc% 
+%doc% The lines you are currently reading are being generated directly from the
+%doc% included \TeX{} files of the preamble. You can remove them by simply removing
+%doc% the line (or putting the comment character \texttt{\%} infront of it) 
+%doc% \verb#\input{template_documentation}# in \texttt{main.tex}.
+%doc% 
+%doc% \subsection{What about modifying the template?}
+%doc% 
+%doc% This template provides an easy to start \LaTeX{} document template with sound
+%doc% default settings. You can modify each setting any time. It is recommended that
+%doc% you are familiar with the documentation of the command whose settings you want
+%doc% to modify.
+%doc% 
+%doc% The following sections describe the settings and commands of this template and
+%doc% gives a short overview of its features.
+
+%doc%
+%doc% \section{\texttt{preamble.tex} --- Main preamble file}
+%doc%
+%doc% In file \verb#preamble/preamble.tex# you will find the basic
+%doc% definitions related to your document. This template uses the \vkabk{KOMA} script
+%doc% extension package of \LaTeX{}.
+%doc% 
+%doc% There are comments added to the \verb#\documentclass{}# definitions. Please
+%doc% refer to the great documentation of \vkabk{KOMA}\footnote{\texttt{scrguide.pdf} for
+%doc% German users} for further details.
+%doc% 
+%doc% \paragraph{What should I do with this file?} For standard purposes you might
+%doc% use the default values it provides. You must not remove its \texttt{include} command
+%doc% in \texttt{main.tex} since it contains important definitions. This file contains
+%doc% settings which are documented well an can be modified according to your needs.
+%doc% It is recommended that you fully understand each setting you modify in order to
+%doc% get a good document result.
+%doc% 
+
+\documentclass[%
+#vkTEXTSIZE,% e.g. 12pt
+a4paper,%
+parskip=half,%  vertical space between paragraphs (instead of indenting first par-line)
+#vkONEORTWOSIDE,% oneside|twoside
+headinclude,%
+footinclude=false,%
+openright%
+]{#vkDOCUMENTCLASS}  %% has to be scrartcl, scrbook, or scrreprt; see KOMA-Script-Docu
+
+
+%doc% 
+%doc% \subsection{UTF8 as input charset}
+%doc% 
+%doc% You are able and should use \vkabk{UTF8} character settings for writing these \TeX{}-files.
+%doc% 
+\usepackage{ucs}             %% UTF8 as input characters
+\usepackage[utf8x]{inputenc} %% UTF8 as input characters
+%% Source: http://latex.tugraz.at/latex/tutorial#laden_von_paketen
+
+
+%doc% 
+%doc% \subsection{Language settings}
+%doc% 
+%doc% The default setting of the language is English. Please change settings for
+%doc% additional or alternative languages used.
+%doc% 
+\usepackage[#vkLANGUAGE]{babel}  %% american ... american english; ngerman ... german
+
+
+%doc% 
+%doc% \subsection{Headers and footers}
+%doc% 
+%doc% Since this template is based on \vkabk{KOMA} script it uses its great \texttt{scrpage2}
+%doc% package for defining header and footer information. Please refer to the \vkabk{KOMA}
+%doc% script documentation how to use this package.
+%doc% 
+\usepackage{scrpage2} %% erweiterte Seitenstile
+
+
+%doc% 
+%doc% \subsection{Miscellaneous packages} \label{subsec:miscpackages}
+%doc% 
+%doc% There are several packages included by default. You might want to activate or
+%doc% deactivate them according to your requirements:
+%doc% 
+%doc% \begin{enumerate}
+
+
+%doc% \item[\texttt{\href{https://secure.wikimedia.org/wikibooks/en/wiki/LaTeX/Formatting\#Other\_symbols}{%%
+%doc% pifont%%
+%doc% }}] 
+%doc% For additional special characters available by \verb#\ding{}#
+%\usepackage{pifont}  %% Sonderzeichen fuer Titelseite \ding{}
+
+%doc% \item[\texttt{\href{http://ctan.org/pkg/ifthen}{%%
+%doc% ifthen%%
+%doc% }}] 
+%doc% For using if/then/else statements for example in macros
+\usepackage{ifthen}  %% fuer Wiederholungen usw.
+
+%doc% \item[\texttt{\href{http://www.ctan.org/tex-archive/fonts/eurosym}{%%
+%doc% eurosym%%
+%doc% }}] 
+%doc% Using the character for Euro with \verb#\officialeuro{}#
+%\usepackage{eurosym}
+
+%doc% \item[\texttt{\href{http://www.ctan.org/tex-archive/help/Catalogue/entries/xspace.html}{%%
+%doc% xspace%%
+%doc% }}] 
+%doc% This package is required for intelligent spacing after commands
+\usepackage{xspace}
+
+%doc% \item[\texttt{\href{https://secure.wikimedia.org/wikibooks/en/wiki/LaTeX/Colors}{%%
+%doc% color%%
+%doc% }}] 
+%doc% This package defines basic colors
+\usepackage[usenames,dvipsnames]{color}
+\definecolor{DispositionColor}{RGB}{30,103,182} %% used for links and so forth in screen-version
+
+
+%% This is undocumented due to problems using american english:
+%\usepackage{blindtext}  %% provides commands for blind text:
+%% \blindtext creates some text,
+%% \Blindtext creates more text.
+%% \blinddocument creates a small document with sections, lists...
+%% \Blinddocument creates a large document with sections, lists...
+%% Source:
+%% http://www.ctan.org/tex-archive/macros/latex/contrib/blindtext/
+
+
+%doc% \end{enumerate}
+
+
+%% === Variablensetzen: ================================================
+
+
+%%%% ================================================================
+%doc% 
+%doc% \subsection{Selfmade commands}
+%doc% 
+%doc% One of the best advantages of \LaTeX{} compared to \vkabk{WYSIWYG} software products is
+%doc% the possibility to define and use macros within text. This empowers the user to
+%doc% a great extend.  Many things can be defined using \verb#\newcommand{}# and
+%doc% automates repeating tasks. It its recommended to use macros not only for
+%doc% repetitive tasks but also for separating form from content such as \vkabk{CSS}
+%doc% does for \vkabk{XHTML}. Think of including graphics in your document: after
+%doc% writing your book, you might want to change all captions to the upper side of
+%doc% each figure. In this case you either have to modify all
+%doc% \texttt{includegraphics} commands or you were clever enough to define something
+%doc% like \verb#\vkfig#\footnote{See below for a detailed description}. Using a
+%doc% macro for including graphics enables you to modify the position caption on only
+%doc% \emph{one} place: at the definition of the macro.
+%doc% 
+%doc% Following section describes some macros that came with this document template
+%doc% from \vkLaT and you are welcome to modify or extend them or to create
+%doc% your own macros!
+%doc% 
+
+%doc% 
+%doc% \subsubsection{\texttt{vkfig} --- including graphics made easy}
+%doc% 
+%doc% The classic: you can easily add graphics to you document with \verb#\vkfig#:
+%doc% \begin{verbatim}
+%doc%  \vkfig{flower}%% filename w/o extension in directory "figures"
+%doc%        {0.7/textwidth}%% width/height
+%doc%        {fig:flower}%% label
+%doc%        {This flower was photographed at my home town in 2010}%% caption
+%doc% \end{verbatim}
+%doc% 
+\newcommand{\vkfig}[4]{
+%% example:
+% \vkfig{}%% filename
+%       {}%% width/height
+%       {}%% label
+%       {}%% caption
+\begin{figure}%[htp]
+  \includegraphics[#2]{figures/#1}
+  \caption{#4}
+  \label{#3} %% NOTE: always label *after* caption!
+\end{figure}
+}
+
+
+%doc% 
+%doc% \subsubsection{\texttt{vkclone} --- repeat things!}
+%doc% 
+%doc% Using \verb#\vkclone[42]{foobar}# results the text `foobar' printed 42 times.
+%doc% But you can not only repeat text output with \texttt{vkclone}. 
+%doc%
+%doc% Default argument
+%doc% for the optional parameter `number of times' (like `42' in the example above) 
+%doc% is set to two.
+%doc% 
+%% \vkclone[x]{text}
+\newcounter{testcnt}
+\newcommand{\vkclone}[2][2]{%
+  \setcounter{vkclonecnt}{#1}%
+  \whiledo{\value{vkclonecnt}>0}{#2\addtocounter{vkclonecnt}{-1}}%
+}
+
+%%%% End 
+%% vim:foldmethod=expr
+%% vim:fde=getline(v\:lnum)=~'^%%%%'?0\:getline(v\:lnum)=~'^%doc.*\ .\\%(sub\\)\\?section{.\\+'?'>1'\:'1':

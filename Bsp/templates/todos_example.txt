@@ -1,0 +1,38 @@
+-++##########  Latest change: #vkDATESTAMP
+-++##########  author:        #vkAUTHOR
+-++##########  members:       #vkOTHERPEOPLE
+-++##########  issue:         #vkISSUE
+-++##########  due to:        #vkDEADLINE
+
+-++#######################   closed issues   ################################++-
+
+[20110413][20110413][gary][] issue 42
+
+Das ist jetzt die Beschreibung
+
+jkds öfjdskf ds
+f dsfjkdsf
+dsf kjdslf jdsf
+dsf jdsklfs
+fs
+
+[20110413][20110413][][] jflkds jflkds
+
+
+-++#######################   open issues   ##################################++-
+
+[20110413][][][] issue 43
+
+blabla
+
+
+[20110413][][][] jflkdsjfkdslf
+
+
+-++#######################   permanent entries   ############################++-
+
+-++#######################   End   ##########################################++-
+
+ %%% Local Variables:
+## vim:foldmethod=expr
+## vim:fde=getline(v\:lnum)=~'^-\+\+#\\{10\\}'?0\:getline(v\:lnum)=~'^\\%([[].*[]]\\)\\{4\\}'?'>1'\:'1':

@@ -1,0 +1,80 @@
+%%%% Latest change: #vkDATESTAMP
+
+%% ========================================================================
+%%%% Disclaimer
+%% ========================================================================
+%%
+%% created by
+%%
+%%      #vkNAME
+%%
+%% using grml GNU/Linux, vim & LaTeX 2e
+
+%% ========================================================================
+%%%% Basic settings
+%% ========================================================================
+\input{preamble/preamble}
+
+%% ========================================================================
+%%%% Typographic settings
+%% ========================================================================
+\input{preamble/typographic_settings}
+
+%% ========================================================================
+%%%% Document metadata
+%% ========================================================================
+%% Following commands are defined here and can be re-used anywhere.
+\newcommand{\vkauthor}{#vkNAME}  %% also used for PDF metadata (hyperref)
+\newcommand{\vksubject}{#vkSUBJECT}  %% also used for PDF metadata (hyperref)
+\newcommand{\vktitle}{#vkTITLE}  %% also used for PDF metadata (hyperref)
+\newcommand{\vkkeywords}{#vkKEYWORDS}  %% also used for PDF metadata (hyperref)
+
+%% ========================================================================
+%%%% MISC usepackages
+%% ========================================================================
+
+
+
+%% ========================================================================
+%%%% MISC self-defined commands
+%% ========================================================================
+
+\newcommand{\vkLaT}{\LaTeX{}@TUG\xspace} %% LaTeX@TUG text "logo"
+
+
+%% ========================================================================
+%%%% Templates
+%% ========================================================================
+
+%% template for inserting figures:
+% \vkfig{}%% filename
+%       {}%% width/height
+%       {}%% label
+%       {}%% caption
+
+%% acronyms in small caps: \vkabk{UNESCO}
+
+\input{preamble/pdf_settings}  %% should be *last* definitions in preamble!
+%% ========================================================================
+%%%% begin{document}
+%% ========================================================================
+\begin{document}
+
+
+
+\tableofcontents  %% this produces the table of contents - you might have guessed :-)
+
+\input{template_documentation} %% delete this line if you want to disable sample text and template documentation
+
+
+\section{MYSECTION}
+
+MYTEXT
+
+
+
+
+%%%% end{document}
+\end{document}
+%% vim:foldmethod=expr
+%% vim:fde=getline(v\:lnum)=~'^%%%%\ .\\+'?'>1'\:'='

@@ -1,0 +1,41 @@
+\documentclass[%
+%DIV=14,% viel mehr Platz auf einer Seite
+%enlargefirstpage,% mehr Platz (bringt nicht viel)
+fontsize=12pt,%
+parskip=half,%
+subject=titled,% 'Betrifft: ' hinschreiben
+backaddress=false,% Absenderadresse nochmal (klein, einzeilig) ueber Empfaenger
+fromalign=left,%
+fromemail=true,%
+fromphone=true%
+]{scrlttr2}
+
+\input{Briefkopf}
+
+\begin{document}
+
+% -------------------------------------------------------------
+
+\setkomavar{subject}{#vkSUBJECT}  %% Betreff
+
+\begin{letter}{%
+#vkRECPCOMPANY\\
+#vkRECPNAME\\
+#vkRECPSTREET\\
+#vkRECPPLY #vkRECPCITY}
+
+\LoadLetterOption{DINmtext} %% Adressfeld ist weiter oben -> mehr Text
+
+\opening{#vkGREETING}
+
+TEXT
+
+\closing{Mit freundlichen Grüßen}
+
+%\encl{Lebenslauf}% Anhang
+
+\end{letter}
+
+% -------------------------------------------------------------
+
+\end{document}
