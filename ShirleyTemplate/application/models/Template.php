@@ -1,10 +1,11 @@
 <?php
+
 class Application_Model_Template
 {
-    protected $_comment;
-    protected $_created;
-    protected $_email;
-    protected $_id;
+    protected $_ID;
+    protected $_name;
+    protected $_userID;
+    protected $_type;
 
     public function __construct(array $options = null)
     {
@@ -17,7 +18,7 @@ class Application_Model_Template
     {
         $method = 'set' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
-            throw new Exception('Invalid Template property');
+            throw new Exception('Invalid template_file property');
         }
         $this->$method($value);
     }
@@ -26,7 +27,7 @@ class Application_Model_Template
     {
         $method = 'get' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
-            throw new Exception('Invalid Template property');
+            throw new Exception('Invalid template_file property');
         }
         return $this->$method();
     }
@@ -42,17 +43,49 @@ class Application_Model_Template
         }
         return $this;
     }
-
-    public function setSureName($text)
+    
+    public function setID($id)
     {
-        $this->_sureName = (string) $text;
+        $this->_ID = (int) $id;
         return $this;
     }
 
-    public function getSureName()
+    public function getID()
     {
-        return $this->_sureName;
+        return $this->_ID;
+    }
+    
+    public function setUserID($id)
+    {
+        $this->_userID = (int) $id;
+        return $this;
     }
 
+    public function getUserID()
+    {
+        return $this->_userID;
+    }
+
+    public function setName($name)
+    {
+        $this->_name = (string) $name;
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->_name;
+    }
+
+    public function setType($type)
+    {
+        $this->_type = $type;
+        return $this;
+    }
+
+    public function getType()
+    {
+        return $this->_type;
+    }
 }
-?>
+

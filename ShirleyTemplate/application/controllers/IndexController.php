@@ -14,11 +14,5 @@ class IndexController extends Zend_Controller_Action
         // action body
     }
 
-    public  function testdbAction()
-    {
-    	$template_file = new Application_Model_TemplateFileMapper();
-    	$this->view->template_files = $template_file->fetchAll();
-    }
-
 }
 

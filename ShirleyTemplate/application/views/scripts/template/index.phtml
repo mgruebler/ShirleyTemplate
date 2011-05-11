@@ -1,18 +1,8 @@
-<ul>
- <li><a href="<?php echo $this->url(
-    array(
-        'controller' => 'template',
-        'action'     => 'fillIn'
-    ),
-    'default',
-    true) ?>">fill template in</a></p>
- </li>
-</ul>
 
-Template: <br />
+
+Template Files Entries: <br />
 <dl>
-    <?php foreach ($this->entries as $entry): ?>
-    <dt><?php echo $this->escape($entry->givenName) ?></dt>
-    <dd><?php echo $this->escape($entry->sureName) ?></dd>
+    <?php foreach ($this->templates as $template): ?>
+    <dd><?php echo $this->escape($template->name) ?></dd>
     <?php endforeach ?>
 </dl>
