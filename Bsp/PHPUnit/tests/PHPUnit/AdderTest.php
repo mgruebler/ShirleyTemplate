@@ -4,7 +4,7 @@
 // or »Run«/»External Tools«.
 // require_once 'PHPUnit/Framework.php';
 
-require_once (dirname(__FILE__) . '\..\Adder.php'); // example for relative path
+require_once (dirname(__FILE__) . '/../../Adder.php'); // example for relative path
 
 /**
  * Test class for Adder.
