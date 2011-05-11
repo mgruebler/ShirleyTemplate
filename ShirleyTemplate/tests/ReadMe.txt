@@ -1,0 +1,1 @@
+ShirleyTemplate/tests && phpunit --configuration phpunit.xml
