@@ -14,6 +14,9 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
         );
 
         $this->bootstrap = array($this, 'appBootstrap');
+        
+        
+        
         parent::setUp();
     }
 
@@ -31,6 +34,17 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
         if($front->getParam('bootstrap') === null) {
             $front->setParam('bootstrap', $this->_application->getBootstrap());
         }
+        
+        $this->createDatabase();
+    }
+    
+    public function createDatabase()
+    {
+    	$dbAdapter = Zend_Db_Table::getDefaultAdapter();
+    	
+    	$sql = file_get_contents('dump.sql', true);
+        
+        $dbAdapter->getConnection()->exec($sql);
     }
 }
 ?>
