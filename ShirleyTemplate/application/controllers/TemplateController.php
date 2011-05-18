@@ -39,4 +39,10 @@ class TemplateController extends Zend_Controller_Action
     	$templates = new Application_Model_TemplateMapper();
     	$this->view->tp_record = $templates->fetchWithId($tp_id);
     }
+    
+    public function userinputAction()
+    {
+    	
+    	
+    }
 }

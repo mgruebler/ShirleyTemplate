@@ -57,7 +57,6 @@ class Application_Model_TemplateMapper
         }
         return $templates;
     }
-<<<<<<< HEAD
     
     public function find($id, Application_Model_TemplateFile $template_file)
     {
@@ -73,7 +72,8 @@ class Application_Model_TemplateMapper
     				  ->setContent($row->content)
     				  ->setType($row->type);
     				//  ->setPlaceHolder($)
-=======
+    				
+    }
 
     public function fetchWithId($tp_id)
     {
@@ -91,7 +91,6 @@ class Application_Model_TemplateMapper
             $templates[] = $template;
         }
         return $templates[0]; // ID is primary key => unique.
->>>>>>> 93cc7a7d2aa395a87e1c9a37bc13b79d70631204
     }
 }
 
