@@ -13,5 +13,16 @@ class IndexControllerTest extends ControllerTestCase
         $this->assertAction('index');
         $this->assertModule('default');
     }
+    
+    public function testReplaceAction()
+    {
+        $this->dispatch('/index/r');
+        
+        
+        $this->assertController('index');
+        $this->assertAction('replace');
+        $this->assertModule('default');
+    }
+    
 }
 

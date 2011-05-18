@@ -37,7 +37,7 @@ class Zend_Tool_Project_Provider_Project
 {
 
     protected $_specialties = array('Info');
-
+path
     /**
      * create()
      *
@@ -219,7 +219,7 @@ Setting Up Your VHOST
 The following is a sample VHOST you might want to consider for your project.
 
 <VirtualHost *:80>
-   DocumentRoot "$path"
+   DocumentRoot "/var/www/ShirleyTemplate/ShirleyTemplate"
    ServerName $name.local
 
    # This should be omitted in the production environment

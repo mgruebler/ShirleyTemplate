@@ -87,5 +87,16 @@ class Application_Model_Template
     {
         return $this->_type;
     }
+    
+    public function getPlaceHolder()
+    {
+    	return $this->_place_holder;
+    }
+    
+    public function setPlaceHolder(array $place_holder)
+    {
+    	$this->_place_holder = (array)$place_holder;
+    	return $this;
+    }
 }
 

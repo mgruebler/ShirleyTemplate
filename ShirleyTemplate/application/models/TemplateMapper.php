@@ -57,5 +57,21 @@ class Application_Model_TemplateMapper
         }
         return $templates;
     }
+    
+    public function find($id, Application_Model_TemplateFile $template_file)
+    {
+    	$result = $this->getDbTable()->find($id);
+    	if (0 == count($result))
+    	{
+    		return;
+    	}
+    	
+    	$row = $result->current();
+    	$template_file->setId($row->id)
+    				  ->setName($row->name)
+    				  ->setContent($row->content)
+    				  ->setType($row->type);
+    				//  ->setPlaceHolder($)
+    }
 }
 
