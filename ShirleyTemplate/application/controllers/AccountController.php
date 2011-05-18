@@ -4,7 +4,7 @@ class AccountController extends Zend_Controller_Action
 	public function getForm()
 	{
 		return new Application_Form_Login(array(
-            'action' => '/account/process',
+            'action' => '/account/login',
             'method' => 'post',
 		));
 	}
@@ -58,16 +58,13 @@ class AccountController extends Zend_Controller_Action
 	
 	public function loginAction()
     {
-        $this->view->form = $this->getForm();
-    }
-    
-	public function processAction()
-    {
         $request = $this->getRequest();
+        
 
         // Check if we have a POST request
         if (!$request->isPost()) {
-            return $this->_helper->redirector('index');
+        	$this->view->form = $this->getForm();
+            return $this->render('login');
         }
 
         // Get our form and validate it
@@ -75,7 +72,7 @@ class AccountController extends Zend_Controller_Action
         if (!$form->isValid($request->getPost())) {
             // Invalid entries
             $this->view->form = $form;
-            return $this->render('index'); // re-render the login form
+            return $this->render('login'); // re-render the login form
         }
 
         // Get our authentication adapter and check credentials
@@ -86,7 +83,8 @@ class AccountController extends Zend_Controller_Action
             // Invalid credentials
             $form->setDescription('Invalid credentials provided');
             $this->view->form = $form;
-            return $this->render('index'); // re-render the login form
+            echo "<script type='text/javascript'>alert('Invalid credentials provided');</script>";
+            return $this->render('login'); // re-render the login form
         }
 
         // We're authenticated! Redirect to the home page
@@ -96,7 +94,7 @@ class AccountController extends Zend_Controller_Action
 	public function logoutAction()
     {
         Zend_Auth::getInstance()->clearIdentity();
-        $this->_helper->redirector('index'); // back to login page
+        $this->_helper->redirector('login', 'account'); // back to login page
     }
     
 	public function registerAction()
@@ -157,7 +155,7 @@ class AccountController extends Zend_Controller_Action
                } 
                else
                {
-                  echo "<script type='text/javascript'>alert('Error!', 'Email and/or username already exists!');</script>";
+                  echo "<script type='text/javascript'>alert('Email and/or username already exists!');</script>";
 					
                   $form->populate($formData);
                }
