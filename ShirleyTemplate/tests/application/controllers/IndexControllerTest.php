@@ -13,5 +13,7 @@ class IndexControllerTest extends ControllerTestCase
         $this->assertAction('index');
         $this->assertModule('default');
     }
+    
+    
 }
 

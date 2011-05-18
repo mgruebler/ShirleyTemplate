@@ -1,6 +1,7 @@
 <?php
 
 require_once 'BaseTestCase.php';
+require_once 'Zend/Filter/Compress/Zip.php';
 
 class TemplateControllerTest extends ControllerTestCase
 {
