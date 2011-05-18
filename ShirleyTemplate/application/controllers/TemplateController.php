@@ -40,9 +40,20 @@ class TemplateController extends Zend_Controller_Action
     	$this->view->tp_record = $templates->fetchWithId($tp_id);
     }
     
-    public function userinputAction()
+    
+    
+    public function inputdatatmpAction()
     {
+    	$req = $this->getRequest();
+
+		$doSave = $req->getParam('submitbutton');
+		
+	    $this->view->ppost = $req->getPost();
+	    
+    	$this->view->iarray = array('submitbutton'=>$doSave	);
     	
     	
     }
+    
+
 }
