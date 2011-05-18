@@ -13,7 +13,7 @@
  
  $output ="";
  */
- echo "test";
+ echo "test".$tp_id;
  $fp = @fopen($this->tp_reccord->name, "r") or die ("Could not open file");
      while($line = fgets($fp, 1024)){
      $output = $output.$line;
