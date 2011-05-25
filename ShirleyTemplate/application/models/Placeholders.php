@@ -4,7 +4,7 @@ class Application_Model_Placeholders
 {
     protected $_ID;
     protected $_name;
-    protected $_tamplateID;
+    protected $_templateID;
 
     public function __construct(array $options = null)
     {

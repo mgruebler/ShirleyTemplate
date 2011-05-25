@@ -1,26 +1,32 @@
 <?php
-/* $tp_id=$this->tp_id;
- echo "<p>Id=".$tp_id."</p>";
- if($this->tp_record === NULL)
- {
- 	echo "not found";
- }
- else
- {
-	//echo "<pre>".print_r($this->tp_record,true)."</pre>";
-	echo "Template-name: »".$this->escape($this->tp_record->name)."«";
- }
+
+  function createWithList($doSave, $fields, $userinput)
+  {
+  	if($doSave)
+  	{   
+  		foreach ($userinput as $keyoutput => $output )
+		{
+			echo $keyoutput.": ";
+			echo $output."<br>";			
+		}
+		return $userinput;
+  	}
+  	
+    else
+    {
+  		echo "<br><form name=\"formular\" method=\"post\">";
+  		
+  		foreach($fields as $output )
+  		{
+  		  echo $output->name.":<br><input type=\"text\" name=\"".$output->name."\" value=\"\"><br>";
+  		}
+  		echo "<br><input type=\"submit\" name=\"submitbutton\" \" value=\"Generate\"> </form>";
+  		return 0;
+    }
+  }
+  
  
- $output ="";
- */
- echo "test".$tp_id;
- $fp = @fopen($this->tp_reccord->name, "r") or die ("Could not open file");
-     while($line = fgets($fp, 1024)){
-     $output = $output.$line;
-     }
-     fclose($fp);
-     
-     echo $ouput;
- 
- 
-  ?>
+  $withList = createWithList(isset($this->iarray['submitbutton']),$this->placeholders, $this->ppost);
+
+?>
+
