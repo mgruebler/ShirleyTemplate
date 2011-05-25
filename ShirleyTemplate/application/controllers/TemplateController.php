@@ -40,7 +40,7 @@ class TemplateController extends Zend_Controller_Action
         	$template = new Application_Model_Template();
         	
        		//$template_mapper->toString();
-        	$template_mapper->find($tp_id, $template);
+        	//$template_mapper->find($tp_id, $template);
     		//$replaceSubstring = new replaceSubstring($tp_id,$req->getPost(),$template_mapper,$file_mapper,$template);    		
     	}
     	
