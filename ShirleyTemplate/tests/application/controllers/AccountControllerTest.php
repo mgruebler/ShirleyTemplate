@@ -75,12 +75,26 @@ class AccountControllerTest extends ControllerTestCase
         $this->assertRedirectTo('/account/login');
     }
  
+    public function testRegisterAction()
+    {
+    	$this->dispatch('/account/register');
+        
+        $this->assertController('account');
+        $this->assertAction('register');
+    }
+    
+	public function testRegisterFormShouldContainLoginForm()
+    {
+        $this->dispatch('/account/register');
+        $this->assertQueryCount('form', 1);
+    }
+    
     public function testRegistrationShouldFailWithInvalidData()
     {
         $data = array(
             'username' => 'This will not work',
-            'email'    => 'this is an invalid email',
             'password' => 'Th1s!s!nv@l1d',
+            'email'    => 'this is an invalid email',
         );
         $request = $this->getRequest();
         $request->setMethod('POST')
@@ -89,4 +103,29 @@ class AccountControllerTest extends ControllerTestCase
         $this->assertNotRedirect();
         $this->assertQuery('form .errors');
     }
+    
+    public function testSuccessfulRegistrationShouldRedirectToIndexPage()
+    {
+    	$data = array(
+            'username' => 'katharina',
+    	    'password' => 'stadlmayr',
+            'email'    => 'katharina@stadlmayr.com',
+    		'name'	   => 'katharina',
+    		'lastname' => 'stadlmayr',
+        );
+        $request = $this->getRequest();
+        $request->setMethod('POST')
+                ->setPost($data);
+        $this->dispatch('/account/register');
+        $this->assertRedirectTo('/');
+    }
+    
+    public function testRegistrationIfLoggedInShouldRedirectToIndexPage()
+    {
+    	$this->loginUser('bernd', 'hirschmann');
+    	
+        $this->dispatch('/account/register');
+        $this->assertRedirectTo('/');
+    }
+    
 }

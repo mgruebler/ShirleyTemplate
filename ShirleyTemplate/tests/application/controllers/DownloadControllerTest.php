@@ -4,26 +4,22 @@ require_once 'BaseTestCase.php';
 
 class DownloadControllerTest extends ControllerTestCase
 {
-	
-	
     public function testIndexAction()
     {
+    	// todo: generate file and set file name
+    	$_SESSION['DownloadFileName'] = "files/test1.zip";
+    	
+    	$front = Zend_Controller_Front::getInstance();
+    	$front->setParam('noErrorHandler', true);
         $this->dispatch('/download');
-        
-        //$this->assertHeader($header)
+       
         $this->assertController('download');
-        //$this->assertAction('index');
-        //$this->assertModule('default');
+        $this->assertAction('index');
         
         $this->assertResponseCode(200);
         
-        
-        //$this->assertTrue(isset($this->controller->view));
-        //$this->assertNull($this->controller);
-        //$this->assertNull($this->controller->testvar);
-
-		//$this->assertTrue(file_exists(BASE_PATH.'\public\files\test.zip'));
-        
+        $this->assertHeaderContains('Content-Type', 'application/zip');
+        $this->assertHeaderContains('Content-Disposition', 'attachment; filename="files/test1.zip"');
     }
 }
 
