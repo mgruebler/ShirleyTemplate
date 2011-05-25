@@ -20,15 +20,17 @@ class DownloadController extends Zend_Controller_Action
     //    $this->_forward('error', 'download');
     //	return false;
     //} 	
+    
+    	$response = $this->getResponse();
 
-    	header('Content-Type: text/html');
-		header('Content-Disposition: attachment; filename="' . $_SESSION['DownloadFileName'] . '"');
-		readfile($_SESSION['DownloadFileName']);
+		$response->setHeader('Content-Type', 'application/zip', true);
+		$response->setHeader('Content-Disposition', 'attachment; filename="' . $_SESSION['DownloadFileName'] . '"', true);
+		//$response->setHttpResponseCode(404);
+		//readfile($_SESSION['DownloadFileName']);
 		
 		// disable the view ... and perhaps the layout
-		$this->view->layout()->disableLayout();
+		$this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
     }
 
 }

@@ -8,22 +8,28 @@ class DownloadControllerTest extends ControllerTestCase
 	
     public function testIndexAction()
     {
+    	$front = Zend_Controller_Front::getInstance();
+    	$front->setParam('noErrorHandler', true);
         $this->dispatch('/download');
         
         //$this->assertHeader($header)
         $this->assertController('download');
-        //$this->assertAction('index');
-        //$this->assertModule('default');
+        $this->assertAction('index');
         
         $this->assertResponseCode(200);
         
+        $response = $this->getResponse();
         
-        //$this->assertTrue(isset($this->controller->view));
-        //$this->assertNull($this->controller);
-        //$this->assertNull($this->controller->testvar);
-
-		//$this->assertTrue(file_exists(BASE_PATH.'\public\files\test.zip'));
+        print('begin response');
+        print($response->__toString());
+        print('end response');
         
+        foreach ($response->getHeaders() as $header=>$headerdata)
+        {
+        	print('bla');
+        	print($header);
+        	print($headerdata);
+        }
     }
 }
 
