@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_TemplateMapper
+class Application_Model_TemplateFileMapper
 {
     protected $_dbTable;
 
@@ -19,17 +19,17 @@ class Application_Model_TemplateMapper
     public function getDbTable()
     {
         if (null === $this->_dbTable) {
-            $this->setDbTable('Application_Model_DbTable_Template');
+            $this->setDbTable('Application_Model_DbTable_TemplateFile');
         }
         return $this->_dbTable;
     }
 
-    public function save(Application_Model_Template $TemplateFile)
+    public function save(Application_Model_TemplateFile $TemplateFile)
     {
         $data = array(
             'name'   => $TemplateFile->getName(),
-            'userID' => $TemplateFile->getUserID(),
-            'type' => $TemplateFile->getType()
+            'templateID' => $TemplateFile->getTemplateID(),
+            'data' => $TemplateFile->getData()
         );
 
         if (null === ($id = $TemplateFile->getID())) {
@@ -48,11 +48,11 @@ class Application_Model_TemplateMapper
         
         $templates = array();
         foreach ($result as $row) {
-            $template = new Application_Model_Template();
+            $template = new Application_Model_TemplateFile();
             $template->setID($row->ID)
                   ->setName($row->name)
-                  ->setUserID($row->userID)
-                  ->setType($row->type);
+                  ->setTemplateID($row->templateID)
+                  ->setData($row->data);
             $templates[] = $template;
         }
         return $templates;
@@ -67,29 +67,47 @@ class Application_Model_TemplateMapper
     	}
     	
     	$row = $result->current();
-    	$template_file->setId($row->id)
+    	$template_file->setID($row->ID)
+    				  ->setTemplateID($row->templateID)
     				  ->setName($row->name)
-    				  ->setContent($row->content)
-    				  ->setType($row->type);
-    				
+    				  ->setData($row->data);
+    	//echo "$row->data DATA";
     }
-
-    public function fetchWithId($tp_id)
-    {
-    	$templateTable = $this->getDbTable();
+    
+    public function getTemplateData($id)
+	{
+		$templateDB = $this->getDbTable();
+    	$select = $templateDB->select();
+    	$select->where('templateid = ?', $id);
     	
-    	$result = $templateTable->fetchAll("ID=".$tp_id);
-        
-        $templates = array();
-    	foreach ($result as $row) {
-            $template = new Application_Model_Template();
-            $template->setID($row->ID)
-                  ->setName($row->name)
-                  ->setUserID($row->userID)
-                  ->setType($row->type);
-            $templates[] = $template;
-        }
-        return $templates[0]; // ID is primary key => unique.
+		$rowset = $templateDB->fetchAll($select);
+		$row = $rowset->current();
+		$data;
+		
+		for( $i = 0; $i < $rowset->count(); $i++) {
+		    $row = $rowset[$i];
+		    $data[$i] = $row->data;
+		    echo "$row->ID";
+		}
+		return $data;
+    }
+    
+	public function getFileName($id)
+	{
+    	$select = $this->getDbTable()->select();
+    	$select->where('templateid = ?', $id);
+    	
+    	//$row = $this->getDbTable()->fetchRow($select);
+		$rowset = $this->getDbTable()->fetchAll($select);
+		$row = $rowset->current();
+		$data;
+		
+		for( $i = 0; $i < $rowset->count(); $i++) {
+		    $row = $rowset[$i];
+		    $data[$i] = $row->name;
+		    echo "$row->name";
+		}
+		return $data;
     }
 }
 

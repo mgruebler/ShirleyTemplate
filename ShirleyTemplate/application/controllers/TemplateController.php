@@ -1,5 +1,7 @@
 <?php
 
+require_once BASE_PATH.'\library\zipFiles.php';
+
 class TemplateController extends Zend_Controller_Action
 {
 
@@ -15,21 +17,60 @@ class TemplateController extends Zend_Controller_Action
     	$this->view->templates = $templates->fetchAll();
     }
     
-	/*public function replaceAction()
-    {
-  		$template_filemapper = new Application_Model_TemplateFileMapper();
-  		$template_file = new Application_Model_TemplateFile();
-  		
-  		$template_filemapper->find($template_file->getId(), $template_file);
-  		$text = $template_file->getContent();
-  		
-  		//$place_holder = array("#vkAUTHOR", "#vkEMAILADDRESS", "#vkVERSION", "#vkTIMESTAMP", "#vkSHORTDESCRIPTION", "#vkTOOLNAME", "#vkNAME", "#vkURL");
-  		//$temp_replace = array("Ich", "blabla@blabla.com", "2.1", "20.20.2001", "descreption of this thing", "test", "testname", "www.url.com");
-  		
-  		$template_result = str_replace("#vkAUTHOR", "ich", "Test #vkAUTHOR");
-  		return $template_result;    	
-    }*/
+    public function replace($place_holder, $replace)
+    {    	
+    	$id = $this->_getParam('templateid');
+    	if($id == 0)
+    		return;
+    		
+        $template = new Application_Model_TemplateFile();
+        $mapper  = new Application_Model_TemplateFileMapper();
 
+        $content = $mapper->getTemplateData($id);
+        $content_name = $mapper->getFileName($id);
+        $mapper->find($id, $template);
+        $text = $template->getData();
+
+        $i = 0;
+        $k = 0;
+        foreach ($content as &$text)
+        {
+        	foreach ($replace as &$value)
+	        {
+	        	$content[$k] = str_replace($place_holder[$i], $value, $content[$k]); 
+	        	$i = $i + 1;
+	        }
+	        $k++;
+	        $i = 0;
+        }
+        
+        if(Zend_Auth::getInstance()->hasIdentity())
+        {
+	        $identity = Zend_Auth::getInstance()->getIdentity();
+	        $zip_name = "$identity$id.zip";
+	        if(!$d = dir(BASE_PATH."/public/files/$identity"))
+	        	mkdir(BASE_PATH ."/public/files/$identity" , 0777);
+	        	
+	       	$_SESSION['DownloadFileName'] = $zip_name;
+	       	$content_array;
+	       	$j = 0;
+	       	foreach( $content as &$text )
+	       	{
+	       		$content_array[ $content_name[$j] ] = "$text";
+	       		$j++;
+	       	}
+		    $zip_file = new zipFiles("$identity/$zip_name", $content_array);
+        }
+       
+        //insert download
+        //$this->_helper->redirector('');
+    /*
+    	$replaceT = new replaceTemplate();
+    	$place_holder = array("#vkSUBJECT", "#vkRECPCOMPANY", "#vkRECPNAME", "#vkRECPSTREET", "#vkRECPPLY", "#vkRECPCITY", "#vkGREETING");
+    	$replace_holder = array("SomeSubject", "SomeCompany", "SomeRecpName", "SomeRecpStreet", "SomeREcpply", "SomeRecpCity", "SomeGreeting");
+    	
+    	$replaceT->replace($place_holder, $replace_holder);*/
+    }
 
     public function fillinAction()
     {

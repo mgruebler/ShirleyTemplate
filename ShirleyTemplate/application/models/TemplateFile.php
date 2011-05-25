@@ -1,12 +1,12 @@
 <?php
 
-class Application_Model_Template
+class Application_Model_TemplateFile
 {
     protected $_ID;
     protected $_name;
-    protected $_userID;
-    protected $_type;
-
+    protected $_templateID;
+    protected $_content;
+    
     public function __construct(array $options = null)
     {
         if (is_array($options)) {
@@ -55,15 +55,15 @@ class Application_Model_Template
         return $this->_ID;
     }
     
-    public function setUserID($id)
+    public function setTemplateID($id)
     {
-        $this->_userID = (int) $id;
+        $this->_templateID = (int) $id;
         return $this;
     }
 
-    public function getUserID()
+    public function getTemplateID()
     {
-        return $this->_userID;
+        return $this->_templateID;
     }
 
     public function setName($name)
@@ -76,16 +76,27 @@ class Application_Model_Template
     {
         return $this->_name;
     }
-
-    public function setType($type)
+    
+    public function getPlaceHolder()
     {
-        $this->_type = $type;
-        return $this;
+    	return $this->_place_holder;
     }
-
-    public function getType()
+    
+    public function setPlaceHolder(array $place_holder)
     {
-        return $this->_type;
+    	$this->_place_holder = (array)$place_holder;
+    	return $this;
+    }
+    
+    public function getData()
+    {
+    	return $this->_content;
+    }
+    
+    public function setData($cont)
+    {
+    	$this->_content = $cont;
+    	return $this;
     }
 }
 
