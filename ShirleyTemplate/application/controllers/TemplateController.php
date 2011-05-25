@@ -22,54 +22,39 @@ class TemplateController extends Zend_Controller_Action
     	$id = $this->_getParam('templateid');
     	if($id == 0)
     		return;
-    		
-        $template = new Application_Model_TemplateFile();
-        $mapper  = new Application_Model_TemplateFileMapper();
+ 
+        $file_mapper  = new Application_Model_TemplateFileMapper();
 
-        $content = $mapper->getTemplateData($id);
-        $content_name = $mapper->getFileName($id);
-        $mapper->find($id, $template);
-        $text = $template->getData();
+        $files = $file_mapper->getTemplateData($id);
 
-        $i = 0;
-        $k = 0;
-        foreach ($content as &$text)
+ 		$content_array = array();
+        foreach ($files as $file)
         {
-        	foreach ($replace as &$value)
+        	$text = $file->getData();
+        	
+        	$i = 0;
+        	foreach ($replace as $value)
 	        {
-	        	$content[$k] = str_replace($place_holder[$i], $value, $content[$k]); 
-	        	$i = $i + 1;
+	        	$text = str_replace($place_holder[$i], $value, $text); 
+	        	$i++;
 	        }
-	        $k++;
-	        $i = 0;
+	        
+	        $content_array[$file->getName()] = $text; // "$text"
         }
         
-        if(Zend_Auth::getInstance()->hasIdentity())
-        {
-	        $identity = Zend_Auth::getInstance()->getIdentity();
-	        $zip_name = "$identity$id.zip";
-	        if(!$d = dir(BASE_PATH."/public/files/$identity"))
-	        	mkdir(BASE_PATH ."/public/files/$identity" , 0777);
-	        	
-	       	$_SESSION['DownloadFileName'] = $zip_name;
-	       	$content_array;
-	       	$j = 0;
-	       	foreach( $content as &$text )
-	       	{
-	       		$content_array[ $content_name[$j] ] = "$text";
-	       		$j++;
-	       	}
-		    $zip_file = new zipFiles("$identity/$zip_name", $content_array);
-        }
-       
-        //insert download
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        $zip_name = "$identity$id.zip";
+        if(!$d = dir(BASE_PATH."/public/files/$identity"))
+        	mkdir(BASE_PATH ."/public/files/$identity" , 0777);
+        	
+       	$_SESSION['DownloadFileName'] = $zip_name;
+       	
+	    $zip_file = new zipFiles("$identity/$zip_name", $content_array);
+        
         //$this->_helper->redirector('');
-    /*
-    	$replaceT = new replaceTemplate();
+    	/*$replaceT = new replaceTemplate();
     	$place_holder = array("#vkSUBJECT", "#vkRECPCOMPANY", "#vkRECPNAME", "#vkRECPSTREET", "#vkRECPPLY", "#vkRECPCITY", "#vkGREETING");
-    	$replace_holder = array("SomeSubject", "SomeCompany", "SomeRecpName", "SomeRecpStreet", "SomeREcpply", "SomeRecpCity", "SomeGreeting");
-    	
-    	$replaceT->replace($place_holder, $replace_holder);*/
+    	$replace_holder = array("SomeSubject", "SomeCompany", "SomeRecpName", "SomeRecpStreet", "SomeREcpply", "SomeRecpCity", "SomeGreeting");*/
     }
 
     public function fillinAction()
@@ -96,5 +81,10 @@ class TemplateController extends Zend_Controller_Action
     	
     }
     
-
+	public function preDispatch()
+	{
+		if (!Zend_Auth::getInstance()->hasIdentity()) {
+			$this->_helper->redirector('login', 'account');
+		}
+	}
 }

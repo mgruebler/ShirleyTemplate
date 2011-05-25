@@ -81,15 +81,18 @@ class Application_Model_TemplateFileMapper
     	$select->where('templateid = ?', $id);
     	
 		$rowset = $templateDB->fetchAll($select);
-		$row = $rowset->current();
-		$data;
 		
-		for( $i = 0; $i < $rowset->count(); $i++) {
-		    $row = $rowset[$i];
-		    $data[$i] = $row->data;
-		    echo "$row->ID";
+		$files = array();
+		
+		foreach($rowset as $row) {
+		    $file = new Application_Model_TemplateFile();
+            $file->setID($row->ID)
+                  ->setName($row->name)
+                  ->setTemplateID($row->templateID)
+                  ->setData($row->data);
+            $files[] = $template;
 		}
-		return $data;
+		return $files;
     }
     
 	public function getFileName($id)
