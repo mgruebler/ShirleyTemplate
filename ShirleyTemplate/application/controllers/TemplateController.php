@@ -17,31 +17,62 @@ class TemplateController extends Zend_Controller_Action
     	$this->view->templates = $templates->fetchAll();
     }
     
-    public function replace($place_holder, $replace)
+    public function replace($id, $place_holder)
     {    	
-    	$id = $this->_getParam('templateid');
-    	if($id == 0)
+    	if(!isset($id))
     		return;
- 
+ 		
+    	$template_mapper = new Application_Model_TemplateMapper();
         $file_mapper  = new Application_Model_TemplateFileMapper();
 
+        $template = new Application_Model_Template();
+        $template_mapper->find($id, $template);
         $files = $file_mapper->getTemplateData($id);
 
- 		$content_array = array();
-        foreach ($files as $file)
+        $type = $template->getType();
+        $content_array = array();
+        if($type == "docx")
         {
-        	$text = $file->getData();
-        	
-        	$i = 0;
-        	foreach ($replace as $value)
-	        {
-	        	$text = str_replace($place_holder[$i], $value, $text); 
-	        	$i++;
-	        }
-	        
-	        $content_array[$file->getName()] = $text; // "$text"
+        	$mailMerge = new Zend_Service_LiveDocx_MailMerge();
+ 
+			$mailMerge->setUsername('ShirleyTemplate')
+			          ->setPassword('ShirleyTemplateSWT11 ');
+			
+			$filename = BASE_PATH.'/public/files/License.docx';
+			$mailMerge->setLocalTemplate($filename);
+			 
+			$mailMerge->assign('software', 'Magic Graphical Compression Suite v1.9')
+	          ->assign('licensee', 'Henry Doener-Meyer')
+	          ->assign('company',  'Co-Operation')
+	          ->assign('date',     'January 11, 2010')
+	          ->assign('time',     'January 11, 2010')
+	          ->assign('city',     'Berlin')
+	          ->assign('country',  'Germany');
+			 
+			$mailMerge->createDocument();
+			 
+			$document = $mailMerge->retrieveDocument('pdf');
+			
+			$filename = BASE_PATH . '/public/files/document.pdf';
+			 
+			file_put_contents($filename, $document);
         }
-        
+        else 
+        {
+	        foreach ($files as $file)
+	        {
+	        	$text = $file->getData();
+	        	$i = 0;
+	        	
+	        	foreach ($replace as $placeholder=>$value)
+		        {
+		        	$text = str_replace($placeholder, $value, $text); 
+		        	$i++;
+		        }
+		        
+		        $content_array[$file->getName()] = $text; // "$text"
+	        }
+        }
         $identity = Zend_Auth::getInstance()->getIdentity();
         $zip_name = "$identity$id.zip";
         if(!$d = dir(BASE_PATH."/public/files/$identity"))

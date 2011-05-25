@@ -71,7 +71,6 @@ class Application_Model_TemplateFileMapper
     				  ->setTemplateID($row->templateID)
     				  ->setName($row->name)
     				  ->setData($row->data);
-    	//echo "$row->data DATA";
     }
     
     public function getTemplateData($id)
