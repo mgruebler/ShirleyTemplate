@@ -6,9 +6,12 @@
   	{   
   		foreach ($userinput as $keyoutput => $output )
 		{
-			echo $keyoutput.": ";
-			echo $output."<br>";			
+//			echo $keyoutput.": ";
+//			echo $output."<br>";			
+        echo $keyoutput.": ".$userinput["$keyoutput"]."<br>";
 		}
+
+//        echo $keyoutput.": ".$userinput["test"]."<br>";
 		return $userinput;
   	}
   	
@@ -27,6 +30,6 @@
   
  
   $withList = createWithList(isset($this->iarray['submitbutton']),$this->placeholders, $this->ppost);
-
+  
 ?>
 
