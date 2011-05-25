@@ -51,7 +51,25 @@ class Application_Model_PlaceholdersMapper
             $placeholder->setID($row->ID)
                   ->setName($row->name)
                   ->setTemplateID($row->templateID);
-            $placeholders[] = $placeholder;
+            $placeholders[$row->name] = $placeholder;
+        }
+        return $placeholders;
+    }
+    
+    
+    public function fetchWithID($tp_id)
+    {
+    	$placeholderTable = $this->getDbTable();
+    	
+    	$result = $placeholderTable->fetchAll('templateID='.$tp_id);
+        
+        $placeholders = array();
+    	foreach ($result as $row) {
+            $placeholder = new Application_Model_Placeholders();
+            $placeholder->setID($row->ID)
+                  ->setName($row->name)
+                  ->setTemplateID($row->templateID);
+                  $placeholders[$row->name] = $placeholder;
         }
         return $placeholders;
     }

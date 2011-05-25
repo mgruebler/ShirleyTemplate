@@ -1,6 +1,6 @@
 <?php
 
-require_once BASE_PATH.'\library\zipFiles.php';
+require_once BASE_PATH.'/library/zipFiles.php';
 
 class TemplateController extends Zend_Controller_Action
 {
@@ -93,25 +93,18 @@ class TemplateController extends Zend_Controller_Action
     	$tp_id = $this->_getParam('templateid');
     	$this->view->tp_id = $tp_id;
     	
-    	$templates = new Application_Model_TemplateMapper();
-    	$this->view->tp_record = $templates->fetchWithId($tp_id);
-    }
-    
-    
-    
-    public function inputdatatmpAction()
-    {
     	$req = $this->getRequest();
-
-		$doSave = $req->getParam('submitbutton');
-		
-	    $this->view->ppost = $req->getPost();
-	    
+    	$this->view->ppost = $req->getPost();
+    	$doSave = $req->getParam('submitbutton');
     	$this->view->iarray = array('submitbutton'=>$doSave	);
-    	
+
+
+    	$placeholders = new Application_Model_PlaceholdersMapper();
+    	$this->view->placeholders = $placeholders->fetchWithID($tp_id);
     	
     }
     
+      
 	public function preDispatch()
 	{
 		if (!Zend_Auth::getInstance()->hasIdentity()) {
