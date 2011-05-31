@@ -1,6 +1,7 @@
 <?php
 
 require_once BASE_PATH . '/library/replaceSubstring.php';
+require_once BASE_PATH.'\library\savePlaceholdersData.php';
 
 class TemplateController extends Zend_Controller_Action
 {
@@ -15,6 +16,10 @@ class TemplateController extends Zend_Controller_Action
     {
     	$templates = new Application_Model_TemplateMapper();
     	$this->view->templates = $templates->fetchAll();
+    	
+    	$userid = $this->getCurrentUserID();
+    	$savePlaceholdersData = new savePlaceholdersData();
+    	$savePlaceholdersData->saveData("Test1", "2", $userid);
     }
     
 
@@ -46,5 +51,15 @@ class TemplateController extends Zend_Controller_Action
 		if (!Zend_Auth::getInstance()->hasIdentity()) {
 			$this->_helper->redirector('login', 'account');
 		}
+	}
+	
+	public function getCurrentUserId()
+	{
+		if (Zend_Auth::getInstance()->hasIdentity()) {
+			$identity = Zend_Auth::getInstance()->getIdentity();
+		}
+		$user_mapper = new Application_Model_UserMapper;
+		$userid = $user_mapper->findWithUsername($identity);
+		return $userid;
 	}
 }

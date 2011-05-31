@@ -73,5 +73,17 @@ class Application_Model_UserMapper
     	
     	return $row;
     }
+    
+ 	public function findWithUsername($username)
+    {
+    	
+		$userTable = $this->getDbTable();
+    	
+    	$select = $userTable->select();
+    	$select->where('username = ?', $username);
+		$row = $userTable->fetchRow($select);
+		
+		return $row->ID;
+    }
 }
 
