@@ -88,12 +88,12 @@ class Application_Model_TemplateFile
     	return $this;
     }
     
-    public function getData()
+    public function getContent()
     {
     	return $this->_content;
     }
     
-    public function setData($cont)
+    public function setContent($cont)
     {
     	$this->_content = $cont;
     	return $this;

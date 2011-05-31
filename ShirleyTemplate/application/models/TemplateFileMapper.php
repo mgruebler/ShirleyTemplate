@@ -52,7 +52,7 @@ class Application_Model_TemplateFileMapper
             $template->setID($row->ID)
                   ->setName($row->name)
                   ->setTemplateID($row->templateID)
-                  ->setData($row->data);
+                  ->setContent($row->data);
             $templates[] = $template;
         }
         return $templates;
@@ -70,7 +70,7 @@ class Application_Model_TemplateFileMapper
     	$template_file->setID($row->ID)
     				  ->setTemplateID($row->templateID)
     				  ->setName($row->name)
-    				  ->setData($row->data);
+    				  ->setContent($row->data);
     }
     
     public function getTemplateData($id)
@@ -88,8 +88,8 @@ class Application_Model_TemplateFileMapper
             $file->setID($row->ID)
                   ->setName($row->name)
                   ->setTemplateID($row->templateID)
-                  ->setData($row->data);
-            $files[] = $template;
+                  ->setContent($row->data);
+            $files[] = $file;
 		}
 		return $files;
     }

@@ -7,9 +7,7 @@ class DownloadController extends Zend_Controller_Action
     }
 
     public function indexAction()
-    {	
-    	$_SESSION['DownloadFileName'] = "files/test1.zip";
-    
+    {
     	$response = $this->getResponse();
 
 		$response->setHeader('Content-Type', 'application/zip', true);
@@ -20,5 +18,11 @@ class DownloadController extends Zend_Controller_Action
 		$this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
     }
-
+    
+	public function preDispatch()
+	{
+		if (!Zend_Auth::getInstance()->hasIdentity()) {
+			$this->_helper->redirector('login', 'account');
+		}
+	}
 }

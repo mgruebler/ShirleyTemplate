@@ -1,6 +1,5 @@
 <?php
 
-require_once BASE_PATH.'/library/zipFiles.php';
 require_once BASE_PATH . '/library/replaceSubstring.php';
 
 class TemplateController extends Zend_Controller_Action
@@ -35,13 +34,8 @@ class TemplateController extends Zend_Controller_Action
     	
     	if(isset($doSave))
     	{
-    		$template_mapper = new Application_Model_TemplateMapper();
-        	$file_mapper  = new Application_Model_TemplateFileMapper();
-        	$template = new Application_Model_Template();
-        	
-       		//$template_mapper->toString();
-        	//$template_mapper->find($tp_id, $template);
-    		//$replaceSubstring = new replaceSubstring($tp_id,$req->getPost(),$template_mapper,$file_mapper,$template);    		
+    		$replaceSubstring = new replaceSubstring($tp_id, $req->getPost());
+    		$this->_helper->redirector('index', 'download');
     	}
     	
     }

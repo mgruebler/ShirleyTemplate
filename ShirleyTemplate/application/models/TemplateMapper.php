@@ -58,7 +58,7 @@ class Application_Model_TemplateMapper
         return $templates;
     }
     
-    public function find($id, Application_Model_TemplateFile $template_file)
+    public function find($id, Application_Model_Template $template)
     {
     	$result = $this->getDbTable()->find($id);
     	if (0 == count($result))
@@ -67,11 +67,10 @@ class Application_Model_TemplateMapper
     	}
     	
     	$row = $result->current();
-    	$template_file->setId($row->id)
-    				  ->setName($row->name)
-    				  ->setContent($row->content)
-    				  ->setType($row->type);
-    				
+    	$template->setId($row->ID)
+    			  ->setName($row->name)
+    			  ->setUserID($row->userID)
+    			  ->setType($row->type);
     }
 
     public function fetchWithId($tp_id)
