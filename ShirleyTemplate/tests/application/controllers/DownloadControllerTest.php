@@ -4,30 +4,12 @@ require_once 'BaseTestCase.php';
 
 class DownloadControllerTest extends ControllerTestCase
 {
-	public function loginUser($user, $password)
-    {
-        $this->request->setMethod('POST')
-                      ->setPost(array(
-                          'username' => $user,
-                          'password' => $password,
-                      ));
-        $this->dispatch('/account/login');
-        $this->assertRedirectTo('/');
- 
-        $this->resetRequest()
-             ->resetResponse();
- 
-        $this->request->setPost(array());
-    }
-    
     public function testIndexAction()
     {
-    	$this->loginUser("bernd", "hirschmann");
+    	$this->loginUserTest();
     	
     	$path = BASE_PATH . "/tests/";
 		$zipFileName = 'test1.zip';
-		
-		echo $path;
 		
     	$_SESSION['DownloadFileName'] = $zipFileName;
        	$_SESSION['DownloadPath'] = $path;

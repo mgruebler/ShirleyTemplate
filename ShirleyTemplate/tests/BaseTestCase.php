@@ -46,5 +46,26 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
         
         $dbAdapter->getConnection()->exec($sql);
     }
+    
+    public function loginUserTest()
+    {
+    	$this->loginUser("bernd", "hirschmann");
+    }
+    
+	public function loginUser($user, $password)
+    {
+        $this->request->setMethod('POST')
+                      ->setPost(array(
+                          'username' => $user,
+                          'password' => $password,
+                      ));
+        $this->dispatch('/account/login');
+        $this->assertRedirectTo('/');
+ 
+        $this->resetRequest()
+             ->resetResponse();
+ 
+        $this->request->setPost(array());
+    }
 }
 ?>

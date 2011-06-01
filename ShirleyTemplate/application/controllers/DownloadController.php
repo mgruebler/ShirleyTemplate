@@ -14,6 +14,9 @@ class DownloadController extends Zend_Controller_Action
 		$response->setHeader('Content-Disposition', 'attachment; filename="' . $_SESSION['DownloadFileName'] . '"', true);
 		readfile($_SESSION['DownloadPath'].$_SESSION['DownloadFileName']);
 		
+		$_SESSION['DownloadPath'] = null;
+		$_SESSION['DownloadFileName'] = null;
+		
 		// disable the view
 		$this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

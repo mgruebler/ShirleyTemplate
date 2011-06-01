@@ -1,15 +1,13 @@
 <?php
 
 require_once BASE_PATH . '/library/replaceSubstring.php';
-require_once BASE_PATH.'\library\savePlaceholdersData.php';
+require_once BASE_PATH.'/library/savePlaceholdersData.php';
 
 class TemplateController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
-
     }
 
     public function indexAction()
@@ -22,7 +20,6 @@ class TemplateController extends Zend_Controller_Action
     	$savePlaceholdersData->saveData("Test1", "2", $userid);
     }
     
-
     public function fillinAction()
     {
     	$tp_id = $this->_getParam('templateid');
@@ -32,7 +29,6 @@ class TemplateController extends Zend_Controller_Action
     	$this->view->ppost = $req->getPost();
     	$doSave = $req->getParam('submitbutton');
     	$this->view->iarray = array('submitbutton'=>$doSave	);
-
 
     	$placeholders = new Application_Model_PlaceholdersMapper();
     	$this->view->placeholders = $placeholders->fetchWithID($tp_id);
@@ -44,7 +40,6 @@ class TemplateController extends Zend_Controller_Action
     	}
     }
     
-      
 	public function preDispatch()
 	{
 		if (!Zend_Auth::getInstance()->hasIdentity()) {
@@ -54,11 +49,16 @@ class TemplateController extends Zend_Controller_Action
 	
 	public function getCurrentUserId()
 	{
-		if (Zend_Auth::getInstance()->hasIdentity()) {
+		//if($identity = Zend_Auth::getInstance()->getIdentity())
+		{
 			$identity = Zend_Auth::getInstance()->getIdentity();
+			$user_mapper = new Application_Model_UserMapper;
+			$userid = $user_mapper->findWithUsername($identity);
+			return $userid;
 		}
-		$user_mapper = new Application_Model_UserMapper;
-		$userid = $user_mapper->findWithUsername($identity);
-		return $userid;
+		//else
+		{
+			//return 1;
+		}
 	}
 }

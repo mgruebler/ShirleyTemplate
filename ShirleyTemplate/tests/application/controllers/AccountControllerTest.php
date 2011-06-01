@@ -4,22 +4,6 @@ require_once 'BaseTestCase.php';
 
 class AccountControllerTest extends ControllerTestCase
 {
-	public function loginUser($user, $password)
-    {
-        $this->request->setMethod('POST')
-                      ->setPost(array(
-                          'username' => $user,
-                          'password' => $password,
-                      ));
-        $this->dispatch('/account/login');
-        $this->assertRedirectTo('/');
- 
-        $this->resetRequest()
-             ->resetResponse();
- 
-        $this->request->setPost(array());
-    }
-    
     public function testLoginAction()
     {
         $this->dispatch('/account/login');

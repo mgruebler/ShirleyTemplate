@@ -7,11 +7,12 @@ class TemplateControllerTest extends ControllerTestCase
 {
     public function testIndexAction()
     {
+    	$this->loginUserTest();
         $this->dispatch('/template/index');
         
-        //$this->assertController('template');
-//        $this->assertAction('index');
-//        $this->assertModule('default');
+        $this->assertController('template');
+        $this->assertAction('index');
+        $this->assertModule('default');
     }     
 }
 
