@@ -22,22 +22,32 @@ html, body{
  display:block;
  overflow:auto;
  background-image: URL("/Images/banner_bg1.png");
+ background-position: center;
 } 
  
 #maincol{
  background-color: #FFFFFF;  
  position: relative; 
+ margin-bottom: 1em;
  }
  
 #footer{
  height:0.5%; 
-  background-color:#CECECE; 
+  background-color:#FFFFFF; 
  clear:both;
  display:block;
  overflow:auto;
+ border-top: 0.1em solid black;
+ text-align: center;
+ font-size: 8pt;
 } 
  
-
+.logo{
+	position:relative;
+	left:1%;
+	padding-top:1%;
+	padding-bottom:1%;
+	}
  
  
 /* ******************************************************************** */ 

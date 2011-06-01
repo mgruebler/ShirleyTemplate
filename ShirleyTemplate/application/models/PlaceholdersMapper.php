@@ -74,7 +74,7 @@ class Application_Model_PlaceholdersMapper
         return $placeholders;
     }
     
-	 public function fetchWithName($name, $tp_id)
+ public function fetchWithName($name, $tp_id)
     {
     	$placeholderTable = $this->getDbTable();
     	$select = $placeholderTable->select();
@@ -84,17 +84,6 @@ class Application_Model_PlaceholdersMapper
     	$result = $placeholderTable->fetchRow($select);
         
         return (int) $result->ID;
-    }
-	 public function fetchTypeWithName($name, $tp_id)
-    {
-    	$placeholderTable = $this->getDbTable();
-    	$select = $placeholderTable->select();
-    	$select->where('name = ?', $name)
-    			->where('templateID = ?', $tp_id);
-    	
-    	$result = $placeholderTable->fetchRow($select);
-        
-        return  (string) $result->type;
     }
 }
 

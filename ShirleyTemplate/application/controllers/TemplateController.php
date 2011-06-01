@@ -28,28 +28,45 @@ class TemplateController extends Zend_Controller_Action
     {
     	$tp_id = $this->_getParam('templateid');
     	$this->view->tp_id = $tp_id;
+    	$placeholders_mapper = new Application_Model_PlaceholdersMapper();
+    	$placeholders = $placeholders_mapper->fetchWithID($tp_id);
+    	$form = new Zend_Form(array(
+            'action' => $this->view->url(array('controller'=>'template','action'=>'fillin','templateid'=>$tp_id)),
+            'method' => 'post',
+		));
     	
-    	$req = $this->getRequest();
-    	$this->view->ppost = $req->getPost();
-    	$doSave = $req->getParam('submitbutton');
-    	$this->view->iarray = array('submitbutton'=>$doSave	);
-
-    	$placeholders = new Application_Model_PlaceholdersMapper();
-    	$this->view->placeholders = $placeholders->fetchWithID($tp_id);
-    	
-    	if(isset($doSave))
+    	foreach($placeholders as $placeholder)
     	{
-    		$replaceSubstring = new replaceSubstring($tp_id, $req->getPost());
-    		
+    		$form->addElement('text', $placeholder->getName(), array(
+	         	'label'      => $placeholder->getName(),
+	            'required'   => true,
+        	));
+    	}
+    	
+    	$form->addElement('submit', 'submit', array(
+            'ignore'   => true,
+            'label'    => 'Generate'
+        ));
+        
+        
+    	$form->addElement('submit', 'submit', array(
+            'ignore'   => true,
+            'label'    => 'Generate'
+        ));
+    	$this->view->form = $form;
+    	
+    	if($this->getRequest()->isPost())
+    	{
+    		$replaceSubstring = new replaceSubstring($tp_id, $this->getRequest()->getPost());
     		$userid = $this->getCurrentUserID();
-    		$data = $req->getPost();
+    		$data = $this->getRequest()->getPost();
 			foreach ( $data as  $keyoutput => $output )
     		{
     			$placeholdersMapper = new Application_Model_PlaceholdersMapper();
     			$placeholderID = $placeholdersMapper->fetchWithName($keyoutput, $tp_id);
     			
     			$savePlaceholdersData = new savePlaceholdersData();
-    			if($keyoutput!="submitbutton")
+    			if($keyoutput!="submit")
     				$savePlaceholdersData->saveData($data["$keyoutput"], $placeholderID, $userid);
     		}
     		$this->_helper->redirector('index', 'download');
