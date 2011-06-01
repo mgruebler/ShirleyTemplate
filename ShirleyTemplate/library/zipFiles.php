@@ -4,13 +4,14 @@ require_once 'Zend/Filter/Compress/Zip.php';
 
 class zipFiles
 {
-	public function zipFiles( $zipFileName, $zipFilesToAdd )
+	public function zipFiles($path, $zipFileName, $zipFilesToAdd)
     {
-    	$zipFileName = BASE_PATH . '/public/files/' . $zipFileName;
+		if(!file_exists($path))
+        	mkdir($path , 0777, true);
     	
 		$zip = new ZipArchive();
 		
-		$zip->open($zipFileName, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+		$zip->open("$path$zipFileName", ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
 	    foreach ($zipFilesToAdd as $fileToAddName => $fileToAddContent ) 
 	    {
@@ -18,7 +19,6 @@ class zipFiles
 		}
 			
 		$zip->close();
-		
     }
 }
     

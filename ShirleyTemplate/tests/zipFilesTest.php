@@ -6,14 +6,15 @@ class zipFilesTest extends PHPUnit_Framework_TestCase
 {
 	public function testCreateZipFile()
 	{
+		$path = BASE_PATH . "/public/files/testuser/";
 		$zipFileName = 'test1.zip';
 		
-		$zipFiles = new zipFiles($zipFileName, array( "fred1.txt" => "Hallo Fred!"
+		$zipFiles = new zipFiles($path, $zipFileName, array( "fred1.txt" => "Hallo Fred!"
 													, "fred2.txt" => "Hello again!"
 													, "marco1.txt" => "Hallo Marco!")
 													);
 		$this->assertTrue(true);
 	
-		$this->assertTrue(file_exists( BASE_PATH . "/public/files/" . $zipFileName ));	
+		$this->assertTrue(file_exists( $path . $zipFileName ));
 	}
 }

@@ -64,22 +64,18 @@ class replaceSubstring
 		        	$i++;
 		        }
 		        
-		        $content_array[$file->getName()] = $text; // "$text"
+		        $content_array[$file->getName()] = $text;
 	        }
         }
-        $identity = Zend_Auth::getInstance()->getIdentity();
-        $zip_name = "$identity$id.zip";
-        if(!$d = dir(BASE_PATH."/public/files/$identity"))
-        	mkdir(BASE_PATH ."/public/files/$identity" , 0777);
-        	
-       	$_SESSION['DownloadFileName'] = "files/".$zip_name;
-       	
-	    $zip_file = new zipFiles("$zip_name", $content_array);
         
-        //$this->_helper->redirector('');
-    	/*$replaceT = new replaceTemplate();
-    	$place_holder = array("#vkSUBJECT", "#vkRECPCOMPANY", "#vkRECPNAME", "#vkRECPSTREET", "#vkRECPPLY", "#vkRECPCITY", "#vkGREETING");
-    	$replace_holder = array("SomeSubject", "SomeCompany", "SomeRecpName", "SomeRecpStreet", "SomeREcpply", "SomeRecpCity", "SomeGreeting");*/
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        $zip_name = $template->getName().".zip";
+        $path = BASE_PATH."/public/files/$identity/";
+       	
+	    $zip_file = new zipFiles($path, $zip_name, $content_array);
+	    
+       	$_SESSION['DownloadFileName'] = $zip_name;
+       	$_SESSION['DownloadPath'] = $path;
     }
 
 }

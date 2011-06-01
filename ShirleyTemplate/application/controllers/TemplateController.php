@@ -42,7 +42,6 @@ class TemplateController extends Zend_Controller_Action
     		$replaceSubstring = new replaceSubstring($tp_id, $req->getPost());
     		$this->_helper->redirector('index', 'download');
     	}
-    	
     }
     
       

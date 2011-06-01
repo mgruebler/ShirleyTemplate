@@ -19,7 +19,7 @@
 -- Current Database: `ShirleyTemplate`
 --
 
-DROP IF EXISTS `ShirleyTemplate`;
+DROP DATABASE IF EXISTS `ShirleyTemplate`;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ShirleyTemplate` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `ShirleyTemplate`;
