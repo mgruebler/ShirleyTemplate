@@ -1,12 +1,10 @@
-
-
-<h1>Template Files Entries: </h1><br />
+<h1>Template Files Entries</h1>
 <ul>
-   
 <?php foreach ($this->templates as $template): ?>
     <li class="template-link">
-    	<img src="/Images/fileicons/<?php echo $template->getType(); ?>.png" alt="<?php echo $template->getType(); ?>" />
+    	
     	<a href="<?php echo $this->url(array('controller'=>'template','action'=>'fillin','templateid'=>$this->escape($template->ID)));?>">
+    		<img src="/Images/fileicons/<?php echo $template->getType(); ?>.png" alt="<?php echo $template->getType(); ?>" />
     		<?php echo $this->escape($template->name) ?> </a>
    	</li>
 <?php endforeach ?>
