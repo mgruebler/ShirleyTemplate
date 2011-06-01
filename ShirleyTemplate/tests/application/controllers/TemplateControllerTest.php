@@ -3,7 +3,7 @@
 require_once 'BaseTestCase.php';
 require_once 'Zend/Filter/Compress/Zip.php';
 
-define('OELF', 11);
+define('OELF', 5);
 
 class TemplateControllerTest extends ControllerTestCase
 {
