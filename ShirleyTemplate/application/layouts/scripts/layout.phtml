@@ -14,7 +14,7 @@
 
 <div id="header">
     <!-- <img src="/Images/banner_bg1.png" height="80"; width="100%"; alt="Logo Shirley Template" ></img>	<!-- bg -->
-    <img src="/Images/st_logo.png" height="80"; alt="Logo Shirley Template" ></img>	<!-- logo -->        
+    <img src="/Images/st_logo.png" height="80"; alt="Logo Shirley Template"; id="Logo" ></img>	<!-- logo -->        
 </div>
 
 
@@ -22,10 +22,10 @@
 <div id="wrapper" class="clearfix">
 			<div id="maincol">
 			<ul class="menu">
-<li class="top"><a href="" target="_self" class="top_link"><span>Template</span></a>
+<li class="top"><a href="" target="_self" class="top_link" id="Template-Menu"><span>Template</span></a>
 <ul class="sub">
-<li><a href="<?php echo $this->url(array('controller'=>'template'),'default', true) ?>" target="_self">Choose your Template</a></li>
-<li><a href="<?php echo $this->url(array('controller'=>'template'),'default',true) ?>" target="_self">Delete a Template</a></li>
+<li><a href="<?php echo $this->url(array('controller'=>'template'),'default', true) ?>" target="_self" id="Choose-Template">Choose your Template</a></li>
+<li><a href="<?php echo $this->url(array('controller'=>'template'),'default',true) ?>" target="_self" id="Delete-Template">Delete a Template</a></li>
 </ul>
 </li>
 <?php 
