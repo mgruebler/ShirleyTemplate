@@ -40,7 +40,7 @@ class Application_Model_UserPlaceholdersDataMapper
         }
     }
 
-    public function fetchAll()
+ public function fetchAll()
     {
     	$userplaceholdersdataTable = $this->getDbTable();
     	
@@ -48,14 +48,27 @@ class Application_Model_UserPlaceholdersDataMapper
         
         $userplaceholdersdatas = array();
         foreach ($result as $row) {
-            $userplaceholderdata = new Application_Model_Placeholders();
+            $userplaceholderdata = new Application_Model_UserPlaceholdersData();
             $userplaceholderdata->setID($row->ID)
                   ->setData($row->data)
-                  ->setPlaceholderID($row->placeholderID)
+                  ->setPlaceholdersID($row->placeholdersID)
                   ->setUserID($row->userID);
             $userplaceholdersdatas[] = $userplaceholderdata;
         }
         return $userplaceholdersdatas;
+    }
+    
+    public function fetchAllTesting($data, $userID, $placeholdersID)
+    {
+    	$userPlaceholdersDataTable = $this->getDbTable();
+    	
+    	$select = $userPlaceholdersDataTable->select();
+    	$select->where('data = ?', $data)
+    		->where('userID = ?', $userID)
+    		->where('placeholdersID = ?', $placeholdersID);
+		$row = $userPlaceholdersDataTable->fetchRow($select);
+		
+		return $row;
     }
 }
 
