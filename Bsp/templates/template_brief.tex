@@ -1,4 +1,4 @@
-%%% File-Information {{{
+﻿%%% File-Information {{{
 %%% Latest change: Wed Mar 23 16:03:00 CET 2011
 %%% Filename: template_brief.tex
 %%% Purpose: private letter
@@ -186,35 +186,35 @@ foldmarks=true
 %%%
 %%% sender's place
 \setkomavar{place}{%
-Graz
+<ST::TEXT>Ort</ST::TEXT>
 }
 
 %%% sender's address
 \setkomavar{fromaddress}{%
-Heimatadresse 59\\ 
-8010 Graz
+<ST::TEXT>Anschrift</ST::TEXT>\\ 
+<ST::NUMBER>PLZ</ST::NUMBER> <ST::TEXT>Ort</ST::TEXT>
 }
 
 %%% sender's email
 %%% requires fromemail set "true"
 \setkomavar{fromemail}{%
-vorname.nachname@domain.at
+<ST::TEXT>EMail</ST::TEXT>
 }
 
 %%% sender's name
 \setkomavar{fromname}{%
-Vorname Nachname
+<ST::TEXT>Vorname</ST::TEXT> <ST::TEXT>Nachname</ST::TEXT>
 }
 
 %%% sender's phone number
 %%% requires fromphone set "true"
 \setkomavar{fromphone}{%
-+43 316 12 34 56
+<ST::TEXT>Telefonnummer</ST::TEXT>
 }
 
 %%% sender's signature
 \setkomavar{signature}{%
-Vorname Nachname
+<ST::TEXT>Vorname</ST::TEXT> <ST::TEXT>Nachname</ST::TEXT>
 }
 
 %%% backaddress, if it's different to "fromaddress"
@@ -226,7 +226,7 @@ Vorname Nachname
 %%% sender's fax
 %%% requires fromfax set "true"
 \setkomavar{fromfax}{%
-+43 316 98 76 54
+<ST::TEXT>Fax</ST::TEXT>
 }
 
 %%% custom date
@@ -248,7 +248,7 @@ http://latex.tugraz.at
 
 %%% subject
 \setkomavar{subject}{%
-Hier der Betreff
+<ST::TEXT>Betreff</ST::TEXT>
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -261,9 +261,9 @@ Hier der Betreff
 
 %%% recipient's name and address
 \begin{letter}{%
-Vorname Nachname\\ 
-Zielstraße 67\\ 
-6020 Innsbruck
+<ST::TEXT>Empfänger_Vorname</ST::TEXT> <ST::TEXT>Empfänger_Nachname</ST::TEXT>\\ 
+<ST::TEXT>Empfänger_Anschrift</ST::TEXT>\\ 
+<ST::NUMBER>Empfänger_PLZ</ST::NUMBER> <ST::TEXT>Empfänger_Ort</ST::TEXT>
 }
 
 \opening{Sehr geehrte Herren,}
