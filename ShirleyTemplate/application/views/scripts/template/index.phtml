@@ -3,8 +3,11 @@
 <h1>Template Files Entries: </h1><br />
 <ul>
    
-    <?php foreach ($this->templates as $template): ?>
-    <li class="template-link"><a href="<?php echo $this->url(array('controller'=>'template','action'=>'fillin','templateid'=>$this->escape($template->ID)));
-    	?>"> <?php echo $this->escape($template->name) ?> </a> </li>
-    <?php endforeach ?>
+<?php foreach ($this->templates as $template): ?>
+    <li class="template-link">
+    	<img src="/Images/fileicons/<?php echo $template->getType(); ?>.png" alt="<?php echo $template->getType(); ?>" />
+    	<a href="<?php echo $this->url(array('controller'=>'template','action'=>'fillin','templateid'=>$this->escape($template->ID)));?>">
+    		<?php echo $this->escape($template->name) ?> </a>
+   	</li>
+<?php endforeach ?>
 </ul>
