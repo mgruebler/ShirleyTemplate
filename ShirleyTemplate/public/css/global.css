@@ -11,16 +11,16 @@ Copyright (c) 2005-2007 Stu Nicholls. All rights reserved.
 This stylesheet and the assocaited (x)html may be modified in any 
 way to fit your requirements.
 =================================================================== */
-#menu {list-style-type:none; margin:0 0 30px 0; padding:0;}
+#menu {list-style-type:none; margin:0 0 30px 0; padding:0; border: 0.1em solid black;}
 
-#menu li {display:block; float:left; position:relative; z-index:100; margin-right:1px;}
+#menu li {display:block; float:left; position:relative; z-index:100; margin-right:1px; border-left: 0.1em solid black; border-right: 0.1em solid black;}
 #menu li span {display:block; z-index:100; padding: 5px 10px;font-size:1.1em;}
 #menu li a, #menu li a:visited {display:block; padding:0; white-space:nowrap;}
 
-#menu dl {position:absolute; top:0; left:0; margin: 0; padding: 0; background:#A0B0FF url(../opacity/opaque.png);}
-* html #menu dl {background:#A0B0FF url(../opacity/opaque.gif);}
+#menu dl {position:absolute; top:0; left:0; margin: 0; padding: 0; background:#FFFFFF url(../opacity/opaque.png);}
+* html #menu dl {background:#FFFFFF url(../opacity/opaque.gif);}
 #menu dt {margin:0; font-size: 1.1em; float:left;}
-#menu dd {display:none; background: #A0B0FF; clear:left; margin:0; padding:0; color: #fff; font-size: 1em; text-align:left;}
+#menu dd {display:none; background: #FFFFFF; clear:left; margin:0; padding:0; color: #fff; font-size: 1em; text-align:left;}
 
 #menu dt a, #menu dt a:visited {display:block; color:#000; padding: 5px 10px; text-decoration:none;}
 #menu dd a, #menu dd a:visited {color:#000; text-decoration:none; display:block; padding: 5px 10px;}
@@ -30,6 +30,9 @@ way to fit your requirements.
 #menu li:hover dd, #menu li a:hover dd {display:block;}
 #menu li:hover dl, #menu li a:hover dl {padding-bottom:15px;}
 #menu li:hover dt a, #menu li a:hover dt a, #menu dd a:hover {color:#c00;}
+
+div#header-user
+/*div#header { background-color: #ffffff; border-bottom: 0.1em solid black; }*/
 
 
 </style>

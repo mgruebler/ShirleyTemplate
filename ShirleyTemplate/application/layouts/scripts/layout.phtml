@@ -4,65 +4,60 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>ShirleyTemplate</title>
   <?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
+  <?php echo $this->headLink()->appendStylesheet('/css/menu_style.css') ?>
+  <?php echo $this->headLink()->appendStylesheet('/css/982558.css') ?>
 
 </head>
 
-
-
 <body>
-<div id="header" style="background-color: #A0B0FF; height: 80px;">
-    <div id="header-logo" style="float: left">
-    <img src="/Images/st_logo.png" height="80px" ></img>    
-    </div>
-    
-    <div id="header-navigation" style="position: absolute; top:50px; left:100px;">
-    
+<div id="pagewidth" >
 
-<ul id="menu">
-<li><span>Template</span>
-<dl>
-	<dt><a href="">
-	Template</a></dt>
-	<dd><a href="<?php echo $this->url(array('controller'=>'template'),'default', true) ?>">
-	Create
-	</a></dd>
-	<dd><a href="<?php echo $this->url(array('controller'=>'template'),'default',true) ?>">Delete</a></dd>
-</dl>
-</li>
-</ul>  
-    
-    
-     </div>
-    
-    <div id="header-user" style="position:absolute; right: 2%; top:60px;">
-        <?php 
-        	$auth = Zend_Auth::getInstance();
-        	if($auth->hasIdentity())
-        	{
-        ?>
-       <a href="<?php echo $this->url(
-       array('controller'=>'account','action'=>'logout'),
-       'default',
-        true) ?>"id="logout">Logout</a>
-       <?php 
-        	} else {
-       ?>
-       <a href="<?php echo $this->url(
-       array('controller'=>'account','action'=>'login'),
-       'default',
-        true) ?>"id="login">Login</a>
-       <a href="<?php echo $this->url(
-       array('controller'=>'account','action'=>'register'),
-       'default',
-       true) ?>"id="register">Register</a>
-        <?php }?>
-    </div>
+<div id="header">
+    <!-- <img src="/Images/banner_bg1.png" height="80"; width="100%"; alt="Logo Shirley Template" ></img>	<!-- bg -->
+    <img src="/Images/st_logo.png" height="80"; alt="Logo Shirley Template" ></img>	<!-- logo -->        
 </div>
 
 
 
+<div id="wrapper" class="clearfix">
+			<div id="maincol">
+			<ul class="menu">
+<li class="top"><a href="" target="_self" class="top_link"><span>Template</span></a>
+<ul class="sub">
+<li><a href="<?php echo $this->url(array('controller'=>'template'),'default', true) ?>" target="_self">Choose your Template</a></li>
+<li><a href="<?php echo $this->url(array('controller'=>'template'),'default',true) ?>" target="_self">Delete a Template</a></li>
+</ul>
+</li>
+<?php 
+        	$auth = Zend_Auth::getInstance();
+        	if($auth->hasIdentity())
+        	{
+        ?>
+<li class="top"><a href="<?php echo $this->url(array('controller'=>'account','action'=>'logout'),'default',true) ?>" target="_self" class="top_link" id="logout"><span>Logout</span></a>
+</li>
+<?php 
+        	} else {
+       ?>
+<li class="top"><a href="<?php echo $this->url(
+       array('controller'=>'account','action'=>'login'),
+       'default',
+        true) ?>" id="login" target="_self" class="top_link"><span>Login</span></a>
+</li>
+<li class="top"><a href="<?php echo $this->url(
+       array('controller'=>'account','action'=>'register'),
+       'default',
+       true) ?>" id="register" target="_self" class="top_link"><span>Register</span></a>
+</li>
+   <?php }?>
+</ul>
+			
+			
+			<?php echo $this->layout()->content ?>
+			</div>
+	</div>
+	<div id="footer"><h2>Copyright by Team 7</h2></div>
+	</div>
 
-<?php echo $this->layout()->content ?>
 
 </body>
 </html>

@@ -7,10 +7,11 @@
     <dd><a href="<?php echo $this->url(array('controller'=>'template','action'=>'fillin','templateid'=>$this->escape($template->ID)));
     	?>"> <?php echo $this->escape($template->name) ?> </a> </dd>
     <?php endforeach ?>
-    
-    <a href="<?php echo $this->url(array('controller'=>'template',
+
+ <!-- 
+    <a href="<?php  /*echo $this->url(array('controller'=>'template',
                                          'action'=>'inputdatatmp',
                                          'templateid'=>$this->escape($template->ID),
-                                         /*'userid'=>$this->escape($user->ID)*/)); ?>">
-    testing inputdatatmp</a>
+                                         ));*/ ?>">
+    testing inputdatatmp</a> -->
 </dl>
