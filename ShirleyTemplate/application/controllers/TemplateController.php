@@ -16,13 +16,12 @@ class TemplateController extends Zend_Controller_Action
     {
     	$templates = new Application_Model_TemplateMapper();
     	$this->view->templates = $templates->fetchAll();
-    	
-    	$userid = $this->getCurrentUserID();
-    	$savePlaceholdersData = new savePlaceholdersData();
-    	$savePlaceholdersData->saveData("Test1", "2", $userid);
     }
     
-
+	/**
+	 * 
+	 * Replaces all the placeholders and saves them in the database
+	 */ 
     public function fillinAction()
     {
     	$tp_id = $this->_getParam('templateid');
@@ -40,6 +39,18 @@ class TemplateController extends Zend_Controller_Action
     	if(isset($doSave))
     	{
     		$replaceSubstring = new replaceSubstring($tp_id, $req->getPost());
+    		
+    		$userid = $this->getCurrentUserID();
+    		$data = $req->getPost();
+			foreach ( $data as  $keyoutput => $output )
+    		{
+    			$placeholdersMapper = new Application_Model_PlaceholdersMapper();
+    			$placeholderID = $placeholdersMapper->fetchWithName($keyoutput, $tp_id);
+    			
+    			$savePlaceholdersData = new savePlaceholdersData();
+    			if($keyoutput!="submitbutton")
+    				$savePlaceholdersData->saveData($data["$keyoutput"], $placeholderID, $userid);
+    		}
     		$this->_helper->redirector('index', 'download');
     	}
     }
@@ -52,6 +63,10 @@ class TemplateController extends Zend_Controller_Action
 		}
 	}
 	
+	/**
+	 * 
+	 * gets the UserID of the currently logged in User
+	 */
 	public function getCurrentUserId()
 	{
 		if (Zend_Auth::getInstance()->hasIdentity()) {
