@@ -38,13 +38,9 @@ class AccountControllerTest extends ControllerTestCase
     public function testLoginFormShouldContainLoginForm()
     {
         $this->dispatch('/account/login');
-        echo "test";
-        //echo "--" . $this->getRequest()->getControllerName() . "--";
-        //echo $this->getResponse()->getBody();
         $this->assertController('account');
         $this->assertAction("login");
         $this->assertQueryCount('form', 1);
-        echo "test2";
         
     }
     

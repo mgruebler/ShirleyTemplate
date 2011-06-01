@@ -58,13 +58,10 @@ class AccountController extends Zend_Controller_Action
 	
 	public function loginAction()
     {
-    	echo "loginAction";
         $request = $this->getRequest();
-        
-		echo "loginAction";
+       
         // Check if we have a POST request
         if (!$request->isPost()) {
-        	echo "isPost";
         	$this->view->form = $this->getForm();
             return $this->render('login');
         }
@@ -73,7 +70,6 @@ class AccountController extends Zend_Controller_Action
         $form = $this->getForm();
         if (!$form->isValid($request->getPost())) {
             // Invalid entries
-            echo "form = form1";
             $this->view->form = $form;
             return $this->render('login'); // re-render the login form
         }
@@ -85,7 +81,6 @@ class AccountController extends Zend_Controller_Action
         if (!$result->isValid()) {
             // Invalid credentials
             $form->setDescription('Invalid credentials provided');
-            echo "form = form1";
             $this->view->form = $form;
             echo "<script type='text/javascript'>alert('Invalid credentials provided');</script>";
             return $this->render('login'); // re-render the login form
