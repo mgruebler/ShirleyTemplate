@@ -57,11 +57,13 @@ class replaceSubstring
 	        {
 	        	$text = $file->getContent();
 	        	$i = 0;
+	        	$placeholderMapper = new Application_Model_PlaceholdersMapper();
 	        	
 	        	foreach ($placeholders as $placeholder=>$value)
 		        {
-		        	$text = str_replace($placeholder, $value, $text);
-		        	$i++;
+		        	$type = $placeholderMapper->fetchTypeWithName($placeholder, $id);
+		        	$replacestring = "<ST::".$type.">".$placeholder."</ST::".$type.">";
+		        	$text = str_replace($replacestring, $value, $text);
 		        }
 		        
 		        $content_array[$file->getName()] = $text;
