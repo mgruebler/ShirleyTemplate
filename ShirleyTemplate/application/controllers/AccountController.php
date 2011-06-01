@@ -59,8 +59,7 @@ class AccountController extends Zend_Controller_Action
 	public function loginAction()
     {
         $request = $this->getRequest();
-        
-
+       
         // Check if we have a POST request
         if (!$request->isPost()) {
         	$this->view->form = $this->getForm();
