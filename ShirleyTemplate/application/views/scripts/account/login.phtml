@@ -1,4 +1,7 @@
 <h2>Please Login</h2>
-<?php
-	echo $this->form;
+<?
+	if(isset($this->error))
+	  echo $this->error;
+	  
+	  echo $this->form;
 ?>
