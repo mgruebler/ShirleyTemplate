@@ -10,6 +10,10 @@ class TemplateController extends Zend_Controller_Action
         /* Initialize action controller here */
     }
 
+    /**
+     * 
+     * Starts the index action
+     **/
     public function indexAction()
     {
     	$templates = new Application_Model_TemplateMapper();
@@ -52,6 +56,11 @@ class TemplateController extends Zend_Controller_Action
     	}
     }
     
+    /**
+     * 
+     * gets called automatically before calling an action and redirects 
+     * the user to the login page if he is not logged in yet 
+    **/
 	public function preDispatch()
 	{
 		if (!Zend_Auth::getInstance()->hasIdentity()) {
@@ -65,16 +74,9 @@ class TemplateController extends Zend_Controller_Action
 	 */
 	public function getCurrentUserId()
 	{
-		//if($identity = Zend_Auth::getInstance()->getIdentity())
-		{
-			$identity = Zend_Auth::getInstance()->getIdentity();
-			$user_mapper = new Application_Model_UserMapper;
-			$userid = $user_mapper->findWithUsername($identity);
-			return $userid;
-		}
-		//else
-		{
-			//return 1;
-		}
+		$identity = Zend_Auth::getInstance()->getIdentity();
+		$user_mapper = new Application_Model_UserMapper;
+		$userid = $user_mapper->findWithUsername($identity);
+		return $userid;
 	}
 }

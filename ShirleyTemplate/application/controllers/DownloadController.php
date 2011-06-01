@@ -6,6 +6,11 @@ class DownloadController extends Zend_Controller_Action
     {
     }
 
+    /**
+     * 
+     * Gets the file name and path from the session and starts the download
+     * After that it clears the session again to avoid bugs
+     */
     public function indexAction()
     {
     	$response = $this->getResponse();

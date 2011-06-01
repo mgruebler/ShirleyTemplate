@@ -1,10 +1,10 @@
 
 
 <h1>Template Files Entries: </h1><br />
-<dl>
+<ul>
    
     <?php foreach ($this->templates as $template): ?>
-    <dd><a href="<?php echo $this->url(array('controller'=>'template','action'=>'fillin','templateid'=>$this->escape($template->ID)));
-    	?>"> <?php echo $this->escape($template->name) ?> </a> </dd>
+    <li class="template-link"><a href="<?php echo $this->url(array('controller'=>'template','action'=>'fillin','templateid'=>$this->escape($template->ID)));
+    	?>"> <?php echo $this->escape($template->name) ?> </a> </li>
     <?php endforeach ?>
-</dl>
+</ul>
