@@ -16,19 +16,19 @@ fromphone=true%
 
 % -------------------------------------------------------------
 
-\setkomavar{subject}{#vkSUBJECT}  %% Betreff
+\setkomavar{subject}{<ST::TEXT>Betreff</ST::TEXT>}  %% Betreff
 
 \begin{letter}{%
-#vkRECPCOMPANY\\
-#vkRECPNAME\\
-#vkRECPSTREET\\
-#vkRECPPLY #vkRECPCITY}
+<ST::TEXT>Empfgänger_Firma</ST::TEXT>\\
+<ST::TEXT>Empfänger_Name</ST::TEXT>\\
+<ST::TEXT>Empfänger_Anschrift</ST::TEXT>\\
+<ST::TEXT>Empfänger_PLZ</ST::TEXT> <ST::TEXT>Empfänger_Stadt</ST::TEXT>}
 
 \LoadLetterOption{DINmtext} %% Adressfeld ist weiter oben -> mehr Text
 
-\opening{#vkGREETING}
+\opening{<ST::TEXT>Begrüßung</ST::TEXT>}
 
-TEXT
+<ST::TEXT>Briefinhalt</ST::TEXT>
 
 \closing{Mit freundlichen Grüßen}
 
