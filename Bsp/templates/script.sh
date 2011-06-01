@@ -1,26 +1,26 @@
 #!/bin/sh
 ##
-##    author:   #vkAUTHOR
-##    contact:  #vkEMAILADDRESS
-##    version:  #vkVERSION
-##    date:     #vkTIMESTAMP
-##    short description: #vkSHORTDESCRIPTION
+##    author:   <ST::TEXT>Name</ST::TEXT>
+##    contact:  <ST::TEXT>EMail</ST::TEXT>
+##    version:  <ST::TEXT>Version</ST::TEXT>
+##    date:     <ST::TEXT>Datum</ST::TEXT>
+##    short description: <ST::TEXT>Beschreibung</ST::TEXT>
 ##
 ##
-##    This file is part of #vkTOOLNAME.
+##    This file is part of <ST::TEXT>Programmname</ST::TEXT>.
 ##
-##    #vkTOOLNAME is free software: you can redistribute it and/or modify
+##    <ST::TEXT>Programmname</ST::TEXT> is free software: you can redistribute it and/or modify
 ##    it under the terms of the GNU General Public License as published by
 ##    the Free Software Foundation, either version 3 of the License, or
 ##    (at your option) any later version.
 ##
-##    #vkTOOLNAME is distributed in the hope that it will be useful,
+##    <ST::TEXT>Programmname</ST::TEXT> is distributed in the hope that it will be useful,
 ##    but WITHOUT ANY WARRANTY; without even the implied warranty of
 ##    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ##    GNU General Public License for more details.
 ##
 ##    You should have received a copy of the GNU General Public License
-##    along with #vkTOOLNAME.  If not, see <http://www.gnu.org/licenses/>.
+##    along with <ST::TEXT>Programmname</ST::TEXT>.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
 # generate filename without directory:
@@ -34,17 +34,17 @@ $CAT <<EOF
 
   $0
 
-  author:      #vkNAME, #vkEMAILADDRESS
+  author:      <ST::TEXT>Name</ST::TEXT>, <ST::TEXT>EMail</ST::TEXT>
 
-  version:     #vkVERSION
+  version:     <ST::TEXT>Version</ST::TEXT>
 
-  homepage:    #vkURL
+  homepage:    <ST::TEXT>Homepage</ST::TEXT>
 
   copyright:   GPLv3
 
   usage:       $FILENAME
 
-  description: #vkSHORTDESCRIPTION
+  description: <ST::TEXT>Beschreibung</ST::TEXT>
 
                Only root can execute this script.
 
