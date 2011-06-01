@@ -59,8 +59,7 @@ class AccountController extends Zend_Controller_Action
 	public function loginAction()
     {
         $request = $this->getRequest();
-        
-
+       
         // Check if we have a POST request
         if (!$request->isPost()) {
         	$this->view->form = $this->getForm();
@@ -83,7 +82,7 @@ class AccountController extends Zend_Controller_Action
             // Invalid credentials
             $form->setDescription('Invalid credentials provided');
             $this->view->form = $form;
-            echo "<script type='text/javascript'>alert('Invalid credentials provided');</script>";
+            $this->view->error = "<b>Error: Invalid credentials provided</b>";
             return $this->render('login'); // re-render the login form
         }
 
@@ -155,7 +154,7 @@ class AccountController extends Zend_Controller_Action
                } 
                else
                {
-                  echo "<script type='text/javascript'>alert('Email and/or username already exists!');</script>";
+                  $this->view->error = "<b>Error: Email and/or username already exists!</b>";
 					
                   $form->populate($formData);
                }

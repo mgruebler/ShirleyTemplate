@@ -1,17 +1,19 @@
 <?php
 
 require_once BASE_PATH . '/library/replaceSubstring.php';
-require_once BASE_PATH.'\library\savePlaceholdersData.php';
+require_once BASE_PATH.'/library/savePlaceholdersData.php';
 
 class TemplateController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
-
     }
 
+    /**
+     * 
+     * Starts the index action
+     **/
     public function indexAction()
     {
     	$templates = new Application_Model_TemplateMapper();
@@ -31,7 +33,6 @@ class TemplateController extends Zend_Controller_Action
     	$this->view->ppost = $req->getPost();
     	$doSave = $req->getParam('submitbutton');
     	$this->view->iarray = array('submitbutton'=>$doSave	);
-
 
     	$placeholders = new Application_Model_PlaceholdersMapper();
     	$this->view->placeholders = $placeholders->fetchWithID($tp_id);
@@ -55,7 +56,11 @@ class TemplateController extends Zend_Controller_Action
     	}
     }
     
-      
+    /**
+     * 
+     * gets called automatically before calling an action and redirects 
+     * the user to the login page if he is not logged in yet 
+    **/
 	public function preDispatch()
 	{
 		if (!Zend_Auth::getInstance()->hasIdentity()) {
@@ -69,9 +74,7 @@ class TemplateController extends Zend_Controller_Action
 	 */
 	public function getCurrentUserId()
 	{
-		if (Zend_Auth::getInstance()->hasIdentity()) {
-			$identity = Zend_Auth::getInstance()->getIdentity();
-		}
+		$identity = Zend_Auth::getInstance()->getIdentity();
 		$user_mapper = new Application_Model_UserMapper;
 		$userid = $user_mapper->findWithUsername($identity);
 		return $userid;

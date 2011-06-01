@@ -1,4 +1,7 @@
 <h2>Please Register</h2>
 <?
-	echo $this->form;
+    if(isset($this->error))
+      echo $this->error;
+      
+    echo $this->form;
 ?>
