@@ -6,8 +6,7 @@
   <?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
   <?php echo $this->headLink()->appendStylesheet('/css/menu_style.css') ?>
   <?php echo $this->headLink()->appendStylesheet('/css/982558.css') ?>
-  <?php echo $this->headLink()->appendStylesheet('/css/dark-hive/jquery-ui-1.8.13.custom.css') ?>
-  <?php echo $this->jQuery(); ?>
+
 </head>
 
 <body>
@@ -22,13 +21,11 @@
 
 <div id="wrapper" class="clearfix">
 			<div id="maincol">
-			
-<div>
 			<ul class="menu">
 <li class="top"><a href="" target="_self" class="top_link" id="Template-Menu"><span>Template</span></a>
 <ul class="sub">
-<li><a href="<?php echo $this->url(array('controller'=>'template'),'default', true) ?>" target="_self" id="Choose-Template">Choose your Template</a></li>
- <!-- <li><a href="<?php /* echo $this->url(array('controller'=>'template'),'default',true)*/ ?>" target="_self" id="Delete-Template">Delete a Template</a></li> -->
+<li><a href="<?php echo $this->url(array('controller'=>'template'),'default', true) ?>" target="_self" id="Choose-Template">Create new Template</a></li>
+<li><a href="<?php echo $this->url(array('controller'=>'template', 'action'=>'reuseview'),'default',true) ?>" target="_self" id="Reuse-Template">Reuse old Templates</a></li>
 </ul>
 </li>
 <?php 
@@ -36,6 +33,12 @@
         	if($auth->hasIdentity())
         	{
         ?>
+<li class="top"><a href="" target="_self" class="top_link" id="Profile-Menu"><span>Profile</span></a>
+<ul class="sub">
+<li><a href="<?php echo $this->url(array('controller'=>'account', 'action'=> 'editprofile'),'default', true) ?>" target="_self" id="Edit-Profile">Edit your Profile</a></li>
+</ul>
+</li>        
+
 <li class="top"><a href="<?php echo $this->url(array('controller'=>'account','action'=>'logout'),'default',true) ?>" target="_self" class="top_link" id="logout"><span>Logout</span></a>
 </li>
 <?php 
@@ -53,11 +56,9 @@
 </li>
    <?php }?>
 </ul>
-</div>
-<div class="contentdata">
+			
 			
 			<?php echo $this->layout()->content ?>
-</div>
 			</div>
 	</div>
 	<div id="footer"><h2>Copyright by Team 7</h2></div>

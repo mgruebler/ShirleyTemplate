@@ -80,7 +80,6 @@ class Application_Model_UserMapper
     // gets a user with a certain username
  	public function findWithUsername($username)
     {
-    	
 		$userTable = $this->getDbTable();
     	
     	$select = $userTable->select();
@@ -88,6 +87,17 @@ class Application_Model_UserMapper
 		$row = $userTable->fetchRow($select);
 		
 		return $row->ID;
+    }
+	
+    public function findUserWithUsername($username)
+    {
+		$userTable = $this->getDbTable();
+    	
+    	$select = $userTable->select();
+    	$select->where('username = ?', $username);
+		$row = $userTable->fetchRow($select);
+		
+		return $row;
     }
 }
 

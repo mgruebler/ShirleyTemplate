@@ -2,7 +2,13 @@
 
 class Application_Form_Register extends Zend_Form
 {
-
+	protected $_isedit;
+	
+	function setIsedit($isedit)
+	{
+		$this->_isedit = $isedit;
+	}
+	
     public function init()
     {	 
    	  
@@ -37,10 +43,18 @@ class Application_Form_Register extends Zend_Form
         ));
         
 		// Add the submit button
-        $this->addElement('submit', 'submit', array(
-            'ignore'   => true,
-            'label'    => 'Register and login!'
-        ));
+		if (!$this->_isedit) {
+       	 	$this->addElement('submit', 'submit', array(
+         	   'ignore'   => true,
+         	   'label'    => 'Register and login!'
+        	));
+		}
+		else {
+			$this->addElement('submit', 'submit', array(
+            	'ignore'   => true,
+            	'label'    => 'Save'
+        	));	
+		}
     }
 }
 

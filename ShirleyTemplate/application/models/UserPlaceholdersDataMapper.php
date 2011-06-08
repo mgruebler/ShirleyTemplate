@@ -26,10 +26,11 @@ class Application_Model_UserPlaceholdersDataMapper
 
     public function save(Application_Model_UserPlaceholdersData $userplaceholdersdata)
     {
-        $data = array(
+	        $data = array(
             'data'   => $userplaceholdersdata->getData(),
             'userID' => $userplaceholdersdata->getUserID(),
-        	'placeholdersID' => $userplaceholdersdata->getPlaceholdersID()
+        	'placeholdersID' => $userplaceholdersdata->getPlaceholdersID(),
+        	'groupID' => $userplaceholdersdata->getGroupID()
         );
 
         if (null === ($id = $userplaceholdersdata->getID())) {
@@ -52,7 +53,8 @@ class Application_Model_UserPlaceholdersDataMapper
             $userplaceholderdata->setID($row->ID)
                   ->setData($row->data)
                   ->setPlaceholdersID($row->placeholdersID)
-                  ->setUserID($row->userID);
+                  ->setUserID($row->userID)
+                  ->setGroupID($row->groupID);
             $userplaceholdersdatas[] = $userplaceholderdata;
         }
         return $userplaceholdersdatas;
@@ -69,6 +71,18 @@ class Application_Model_UserPlaceholdersDataMapper
 		$row = $userPlaceholdersDataTable->fetchRow($select);
 		
 		return $row;
+    }
+    
+    public function getNextGroup()
+    {
+    	$userPlaceholdersDataTable = $this->getDBTable();
+
+    	$select = $userPlaceholdersDataTable->select();
+    	$select->order('groupID DESC');
+    	
+		$row = $userPlaceholdersDataTable->fetchRow($select);
+		
+		return $row->groupID + 1;    	
     }
 }
 
