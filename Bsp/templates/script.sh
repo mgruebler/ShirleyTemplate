@@ -3,7 +3,7 @@
 ##    author:   <ST::TEXT>Name</ST::TEXT>
 ##    contact:  <ST::TEXT>EMail</ST::TEXT>
 ##    version:  <ST::TEXT>Version</ST::TEXT>
-##    date:     <ST::TEXT>Datum</ST::TEXT>
+##    date:     <ST::DATE>Datum</ST::DATE>
 ##    short description: <ST::TEXT>Beschreibung</ST::TEXT>
 ##
 ##

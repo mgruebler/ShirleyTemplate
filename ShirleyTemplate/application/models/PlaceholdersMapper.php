@@ -24,6 +24,7 @@ class Application_Model_PlaceholdersMapper
         return $this->_dbTable;
     }
 
+    // saves a Placeholder with ID, name and templateID in the database
     public function save(Application_Model_Placeholders $placeholders)
     {
         $data = array(
@@ -39,6 +40,7 @@ class Application_Model_PlaceholdersMapper
         }
     }
 
+    // gets all Parameters from the Database
     public function fetchAll()
     {
     	$placeholdersTable = $this->getDbTable();
@@ -56,7 +58,7 @@ class Application_Model_PlaceholdersMapper
         return $placeholders;
     }
     
-    
+	// gets all Parameters with the given ID 
     public function fetchWithID($tp_id)
     {
     	$placeholderTable = $this->getDbTable();
@@ -74,7 +76,8 @@ class Application_Model_PlaceholdersMapper
         return $placeholders;
     }
     
- public function fetchWithName($name, $tp_id)
+ 	// gets all Parameters with a given name and Template ID
+    public function fetchWithName($name, $tp_id)
     {
     	$placeholderTable = $this->getDbTable();
     	$select = $placeholderTable->select();
