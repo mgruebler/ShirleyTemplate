@@ -5,6 +5,7 @@ class Application_Model_Placeholders
     protected $_ID;
     protected $_name;
     protected $_templateID;
+    protected $_type;
 
     public function __construct(array $options = null)
     {
@@ -74,6 +75,18 @@ class Application_Model_Placeholders
     public function getName()
     {
         return $this->_name;
+    }
+    
+
+    public function setType($type)
+    {
+        $this->_type = (string) $type;
+        return $this;
+    }
+
+    public function getType()
+    {
+        return $this->_type;
     }
 
 }

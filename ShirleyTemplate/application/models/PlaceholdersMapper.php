@@ -24,14 +24,15 @@ class Application_Model_PlaceholdersMapper
         return $this->_dbTable;
     }
 
-    public function save(Application_Model_Placeholders $placeholders)
+    public function save(Application_Model_Placeholders $placeholder)
     {
         $data = array(
-            'name'   => $placeholders->getName(),
-            'templateID' => $placeholders->getTemplateID()
+            'name'   => $placeholder->getName(),
+            'templateID' => $placeholder->getTemplateID(),
+        	'type' => $placeholder->getType()
         );
 
-        if (null === ($id = $placeholders->getID())) {
+        if (null === ($id = $placeholder->getID())) {
             unset($data['ID']);
             $this->getDbTable()->insert($data);
         } else {
@@ -50,7 +51,8 @@ class Application_Model_PlaceholdersMapper
             $placeholder = new Application_Model_Placeholders();
             $placeholder->setID($row->ID)
                   ->setName($row->name)
-                  ->setTemplateID($row->templateID);
+                  ->setTemplateID($row->templateID)
+                  ->setType($row->type);
             $placeholders[$row->name] = $placeholder;
         }
         return $placeholders;
@@ -68,7 +70,8 @@ class Application_Model_PlaceholdersMapper
             $placeholder = new Application_Model_Placeholders();
             $placeholder->setID($row->ID)
                   ->setName($row->name)
-                  ->setTemplateID($row->templateID);
+                  ->setTemplateID($row->templateID)
+                  ->setType($row->type);
                   $placeholders[$row->name] = $placeholder;
         }
         return $placeholders;

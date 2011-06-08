@@ -36,6 +36,100 @@ class TemplateControllerTest extends ControllerTestCase
         $this->assertQueryCount('input[type="text"]', 7);
     }
     
+    public function testFillInShouldCheckForRequired()
+    {
+    	$this->loginUserTest();
+    	
+    	$array = array(	'Vorname' => '',
+     					'Nachname' =>'',
+                   		'Geburtstag'=> '',
+                   		'Familienstand' => '',
+                   		'Staatsbürgerschaft' => '',
+                    	'Anschrift' => '',
+                    	'Postleitzahl_ohne_A' => '',
+                    	'Wohnort' => '',
+						'Maturajahrgang' => '',
+				    	'Berufserfahrung' => '',
+				    	'Führerschein' => '',
+				    	'Fremdsprachen' => '',
+				    	'Monat_Studienbeginn' => '',
+				    	'Jahr_Studenbeginn' => '',
+				    	'Studienrichtung' => '',
+				    	'Universität' => '',  
+				    	'Monat_der_Publikation' => '',
+				    	'Jahr_Publikation' => '',
+				    	'Autoren_der_Publikation' => '',
+				    	'Name_der_Publikation' => '',
+				    	'Ort_der_Publikation' => '',
+				    	'Land_der_Publikation' => '',
+				    	'Ort' => '');
+
+   		$this->request->setMethod('POST')
+                      ->setPost($array);   
+
+        $this->dispatch('/template/fillin/templateid/13');
+    	
+        $this->assertController('template');
+        $this->assertAction('fillin');
+        
+        $this->assertQueryCount('ul.errors', 23);
+    }
+        
+    /*public function testFillInShouldCheckForValidDate()
+    {
+    	$this->loginUserTest();
+    	
+    	$array = array(	'Vorname' => 'Max',
+     					'Nachname' =>'Muster',
+                   		'Geburtstag'=> 'dd',
+                   		'Familienstand' => 'ledig',
+                   		'Staatsbürgerschaft' => 'A',
+                    	'Anschrift' => 'irgendwo',
+                    	'Postleitzahl_ohne_A' => '1111',
+                    	'Wohnort' => 'Wien',
+						'Maturajahrgang' => '1234',
+				    	'Berufserfahrung' => 'Ja',
+				    	'Führerschein' => 'Nein',
+				    	'Fremdsprachen' => 'Vielleicht',
+				    	'Monat_Studienbeginn' => '1',
+				    	'Jahr_Studenbeginn' => '90',
+				    	'Studienrichtung' => 'dd',
+				    	'Universität' => 'dd',  
+				    	'Monat_der_Publikation' => '03',
+				    	'Jahr_Publikation' => '00',
+				    	'Autoren_der_Publikation' => 'autoren',
+				    	'Name_der_Publikation' => 'name',
+				    	'Ort_der_Publikation' => 'ort',
+				    	'Land_der_Publikation' => 'land',
+				    	'Ort' => 'ort');
+
+   		$this->request->setMethod('POST')
+                      ->setPost($array);
+                      
+       	$this->request->setHeaders(array('Accept-Charset' => 'utf-8'));
+                      
+    	foreach ($this->getRequest()->getHeaders() as $key=>$value)
+        {
+        	echo $key." ".$value;
+        }
+
+        $this->dispatch('/template/fillin/templateid/13');
+    	
+        $this->assertController('template');
+        $this->assertAction('fillin');
+        
+        foreach ($this->getResponse()->getHeaders() as $key=>$value)
+        {
+        	echo $key." ".$value;
+        }
+        
+        echo $this->getResponse()->getBody();
+        
+        $this->assertQueryCount('ul.errors', 1);
+        
+        
+    }*/
+    
  	public function FillInForm($tmp_id)
     {
      	$array = array(	'software' => 'software_test',
