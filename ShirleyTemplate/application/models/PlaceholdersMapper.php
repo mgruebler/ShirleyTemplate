@@ -73,7 +73,7 @@ class Application_Model_PlaceholdersMapper
             $placeholder->setID($row->ID)
                   ->setName($row->name)
                   ->setTemplateID($row->templateID)
-                  ->setEnglishname($row->enlishname);
+                  ->setEnglishname($row->englishname);
                   $placeholders[$row->name] = $placeholder;
         }
         return $placeholders;
