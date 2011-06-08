@@ -33,6 +33,12 @@
         	if($auth->hasIdentity())
         	{
         ?>
+<li class="top"><a href="" target="_self" class="top_link" id="Profile-Menu"><span>Profile</span></a>
+<ul class="sub">
+<li><a href="<?php echo $this->url(array('controller'=>'account', 'action'=> 'editprofile'),'default', true) ?>" target="_self" id="Edit-Profile">Edit your Profile</a></li>
+</ul>
+</li>        
+
 <li class="top"><a href="<?php echo $this->url(array('controller'=>'account','action'=>'logout'),'default',true) ?>" target="_self" class="top_link" id="logout"><span>Logout</span></a>
 </li>
 <?php 
