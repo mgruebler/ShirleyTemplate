@@ -20,37 +20,34 @@ html, body{
  
 #header{
  position:relative; 
- height:20%; 
+ height: 100px; 
  background-color:#CECECE; 
  width:100%;
  display:block;
  overflow:auto;
- background-image: URL("/Images/banner_bg1.png");
- background-position: center;
+ background-image: URL("/Images/logo.png");
  background-repeat: no-repeat;
 } 
  
 #maincol{
  background-color: #FFFFFF;  
  position: relative; 
- margin-bottom: 1em;
+ padding-bottom: 1em;
  }
  
- .contentdata
+ #contentdata
  {
  	padding: 0 1.5em;
  }
  
 #footer{
- height:0.5%; 
-  background-color:#FFFFFF; 
+ height:20px; 
  clear:both;
  display:block;
  overflow:auto;
- border-top: 0.1em solid black;
- text-align: center;
- font-size: 8pt;
- 
+ text-align: right;
+ font-size: 12px;
+ padding: 5px;
 }
 
 ul
@@ -147,5 +144,5 @@ input[type="submit"]
 
 h1
 {
-	color: #86E49A;
+	color: #444;
 }
