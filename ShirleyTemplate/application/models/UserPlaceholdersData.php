@@ -6,6 +6,7 @@ class Application_Model_UserPlaceholdersData
     protected $_userID;
     protected $_placeholdersID;
     protected $_data;
+    protected $_groupID;
 
     public function __construct(array $options = null)
     {
@@ -86,6 +87,17 @@ class Application_Model_UserPlaceholdersData
     public function getData()
     {
         return $this->_data;
+    }
+    
+        public function setGroupID($groupID)
+    {
+        $this->_groupID = (int) $groupID;
+        return $this;
+    }
+
+    public function getGroupID()
+    {
+        return $this->_groupID;
     }
 
 }

@@ -20,6 +20,12 @@ class TemplateController extends Zend_Controller_Action
     	$this->view->templates = $templates->fetchAll();
     }
     
+    public function reuseviewAction()
+    {
+    	$templates = new Application_Model_TemplateMapper();
+    	$this->view->templates = $templates->fetchAll();
+    }
+    
 	/**
 	 * 
 	 * Replaces all the placeholders and saves them in the database
@@ -96,6 +102,75 @@ class TemplateController extends Zend_Controller_Action
     		}
     	}
     }
+    
+    
+    
+    public function reuseAction()
+    {
+    	$tp_id = $this->_getParam('templateid');
+    	$this->view->tp_id = $tp_id;
+    	$placeholders_mapper = new Application_Model_PlaceholdersMapper();
+    	$placeholders = $placeholders_mapper->fetchWithID($tp_id);
+    	$form = new Zend_Form(array(
+            'action' => $this->view->url(array('controller'=>'template','action'=>'fillin','templateid'=>$tp_id)),
+            'method' => 'post',
+		));
+   		$form->setAttrib('value');    	
+    	
+       	$userPlaceholdersDataMapper = new Application_Model_UserPlaceholdersDataMapper();
+        $groupID = $userPlaceholdersDataMapper->getNextGroup();
+//        
+//        $input = array();
+//        
+//        foreach($placeholders as $placeholder)
+//        {
+//        	$input["$placeholder"] = $placeholder->getName();
+//        }
+
+   	
+    	foreach($placeholders as $placeholder)
+    	{
+
+    		$form->addElement('text', $placeholder->getName(), array(
+    			'label' => $placeholder->getName(),
+	            'required'   => true,
+	            'value' => $placeholder->getName()
+        	));
+    	}
+
+    	$form->addElement('text','SaveName', array(
+    			'label' => 'Save Input Name',
+    			'required' => true    	
+    	));
+        
+    	$form->addElement('submit', 'submit', array(
+            'ignore'   => true,
+            'label'    => 'Generate'
+        ));
+    	$this->view->form = $form;
+    	
+    	if($this->getRequest()->isPost())
+    	{
+    		$replaceSubstring = new replaceSubstring($tp_id, $this->getRequest()->getPost());
+    		$userid = $this->getCurrentUserID();
+    		$data = $this->getRequest()->getPost();
+    		
+			foreach ( $data as  $keyoutput => $output )
+    		{
+    			$placeholdersMapper = new Application_Model_PlaceholdersMapper();
+    			$placeholderID = $placeholdersMapper->fetchWithName($keyoutput, $tp_id);
+    			
+    			$savePlaceholdersData = new savePlaceholdersData();
+    			if($keyoutput!="submit")
+    				$savePlaceholdersData->saveData($data["$keyoutput"], $placeholderID, $userid, $groupID);
+    		}
+    		$this->_helper->redirector('index', 'download');
+    	}
+    }
+       
+    
+    
+    
     
     /**
      * 
