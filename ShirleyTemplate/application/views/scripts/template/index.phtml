@@ -3,7 +3,7 @@
 <?php foreach ($this->templates as $template): ?>
     <li class="template-link">
     	
-    	<a href="<?php echo $this->url(array('controller'=>'template','action'=>'reuse','templateid'=>$this->escape($template->ID)));?>">
+    	<a href="<?php echo $this->url(array('controller'=>'template','action'=>'fillin','templateid'=>$this->escape($template->ID)));?>">
     		<img src="/Images/fileicons/<?php echo $template->getType(); ?>.png" alt="<?php echo $template->getType(); ?>" />
     		<?php echo $this->escape($template->name) ?> </a>
    	</li>
