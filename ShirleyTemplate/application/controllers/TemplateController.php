@@ -30,24 +30,40 @@ class TemplateController extends Zend_Controller_Action
     	$this->view->tp_id = $tp_id;
     	$placeholders_mapper = new Application_Model_PlaceholdersMapper();
     	$placeholders = $placeholders_mapper->fetchWithID($tp_id);
-    	$form = new Zend_Form(array(
+    	$form = new ZendX_JQuery_Form(array(
             'action' => $this->view->url(array('controller'=>'template','action'=>'fillin','templateid'=>$tp_id)),
             'method' => 'post',
 		));
     	
     	foreach($placeholders as $placeholder)
     	{
-    		$form->addElement('text', $placeholder->getName(), array(
-	         	'label'      => $placeholder->getName(),
-	            'required'   => true,
-        	));
+    		
+    		$t = $placeholder->getType();
+    		
+    		switch ($t)
+    		{
+    			case 'DATE':
+    				$form->addElement('datepicker', $placeholder->getName(), array(
+	         			'label'      => $placeholder->getName().' (dd/mm/yyyy)',
+	            		'required'   => true,
+    					'validators'   => array(array('validator' => 'date', 'options' => array('format' => 'dd/mm/yyyy'))),
+        			));
+    				break;
+    			case 'NUMBER':
+    				$form->addElement('text', $placeholder->getName(), array(
+	         			'label'        => $placeholder->getName(),
+	            		'required'     => true,
+    					'validators'   => array('int'),
+        			));
+    				break;
+    			default:
+    				$form->addElement('text', $placeholder->getName(), array(
+	         			'label'      => $placeholder->getName(),
+	            		'required'   => true,
+        			));
+    				break;
+    		}
     	}
-    	
-    	$form->addElement('submit', 'submit', array(
-            'ignore'   => true,
-            'label'    => 'Generate'
-        ));
-        
         
     	$form->addElement('submit', 'submit', array(
             'ignore'   => true,
@@ -57,19 +73,27 @@ class TemplateController extends Zend_Controller_Action
     	
     	if($this->getRequest()->isPost())
     	{
-    		$replaceSubstring = new replaceSubstring($tp_id, $this->getRequest()->getPost());
-    		$userid = $this->getCurrentUserID();
     		$data = $this->getRequest()->getPost();
-			foreach ( $data as  $keyoutput => $output )
+    		if ($form->isValid($data) ) 
     		{
-    			$placeholdersMapper = new Application_Model_PlaceholdersMapper();
-    			$placeholderID = $placeholdersMapper->fetchWithName($keyoutput, $tp_id);
-    			
-    			$savePlaceholdersData = new savePlaceholdersData();
-    			if($keyoutput!="submit")
-    				$savePlaceholdersData->saveData($data["$keyoutput"], $placeholderID, $userid);
+	    		$replaceSubstring = new replaceSubstring($tp_id, $data);
+	    		$userid = $this->getCurrentUserID();
+	    		
+				foreach ( $data as  $keyoutput => $output )
+	    		{
+	    			$placeholdersMapper = new Application_Model_PlaceholdersMapper();
+	    			$placeholderID = $placeholdersMapper->fetchWithName($keyoutput, $tp_id);
+	    			
+	    			$savePlaceholdersData = new savePlaceholdersData();
+	    			if($keyoutput!="submit")
+	    				$savePlaceholdersData->saveData($data["$keyoutput"], $placeholderID, $userid);
+	    		}
+	    		$this->_helper->redirector('index', 'download');
     		}
-    		$this->_helper->redirector('index', 'download');
+    		else 
+    		{
+    			$form->populate($data);
+    		}
     	}
     }
     

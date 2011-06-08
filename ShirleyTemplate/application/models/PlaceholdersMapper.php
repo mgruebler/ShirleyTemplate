@@ -25,15 +25,16 @@ class Application_Model_PlaceholdersMapper
     }
 
     // saves a Placeholder with ID, name and templateID in the database
-    public function save(Application_Model_Placeholders $placeholders)
+    public function save(Application_Model_Placeholders $placeholder)
     {
         $data = array(
-            'name'   => $placeholders->getName(),
-            'templateID' => $placeholders->getTemplateID(),
-        	'englishname' => $placeholders->getEnglishname()
+            'name'   => $placeholder->getName(),
+            'templateID' => $placeholder->getTemplateID(),
+        	'type' => $placeholder->getType(),
+            'englishname' => $placeholders->getEnglishname()
         );
 
-        if (null === ($id = $placeholders->getID())) {
+        if (null === ($id = $placeholder->getID())) {
             unset($data['ID']);
             $this->getDbTable()->insert($data);
         } else {
@@ -54,6 +55,7 @@ class Application_Model_PlaceholdersMapper
             $placeholder->setID($row->ID)
                   ->setName($row->name)
                   ->setTemplateID($row->templateID)
+                  ->setType($row->type)
                   ->setEnglishname($row->englishname);
             $placeholders[$row->name] = $placeholder;
         }
@@ -73,6 +75,7 @@ class Application_Model_PlaceholdersMapper
             $placeholder->setID($row->ID)
                   ->setName($row->name)
                   ->setTemplateID($row->templateID)
+                  ->setType($row->type)
                   ->setEnglishname($row->englishname);
                   $placeholders[$row->name] = $placeholder;
         }
