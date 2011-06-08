@@ -29,7 +29,8 @@ class Application_Model_PlaceholdersMapper
     {
         $data = array(
             'name'   => $placeholders->getName(),
-            'templateID' => $placeholders->getTemplateID()
+            'templateID' => $placeholders->getTemplateID(),
+        	'englishname' => $placeholders->getEnglishname()
         );
 
         if (null === ($id = $placeholders->getID())) {
@@ -40,7 +41,7 @@ class Application_Model_PlaceholdersMapper
         }
     }
 
-    // gets all Parameters from the Database
+    // gets all Placeholders from the Database
     public function fetchAll()
     {
     	$placeholdersTable = $this->getDbTable();
@@ -52,13 +53,14 @@ class Application_Model_PlaceholdersMapper
             $placeholder = new Application_Model_Placeholders();
             $placeholder->setID($row->ID)
                   ->setName($row->name)
-                  ->setTemplateID($row->templateID);
+                  ->setTemplateID($row->templateID)
+                  ->setEnglishname($row->englishname);
             $placeholders[$row->name] = $placeholder;
         }
         return $placeholders;
     }
     
-	// gets all Parameters with the given ID 
+	// gets all Placeholders with the given ID 
     public function fetchWithID($tp_id)
     {
     	$placeholderTable = $this->getDbTable();
@@ -70,13 +72,14 @@ class Application_Model_PlaceholdersMapper
             $placeholder = new Application_Model_Placeholders();
             $placeholder->setID($row->ID)
                   ->setName($row->name)
-                  ->setTemplateID($row->templateID);
+                  ->setTemplateID($row->templateID)
+                  ->setEnglishname($row->enlishname);
                   $placeholders[$row->name] = $placeholder;
         }
         return $placeholders;
     }
     
- 	// gets all Parameters with a given name and Template ID
+ 	// gets all Placeholders with a given name and Template ID
     public function fetchWithName($name, $tp_id)
     {
     	$placeholderTable = $this->getDbTable();

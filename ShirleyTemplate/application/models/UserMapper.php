@@ -24,6 +24,7 @@ class Application_Model_UserMapper
         return $this->_dbTable;
     }
 
+    // saves the User in the database
     public function save(Application_Model_User $user)
     {
         $data = array(
@@ -42,6 +43,7 @@ class Application_Model_UserMapper
         }
     }
 
+    // gets all Users from the database
     public function fetchAll()
     {
     	$userTable = $this->getDbTable();
@@ -62,6 +64,7 @@ class Application_Model_UserMapper
         return $users;
     }
     
+    // checks, if the given username already exists in the database
     public function checkUsername($username)
     {
     	$userTable = $this->getDbTable();
@@ -74,6 +77,7 @@ class Application_Model_UserMapper
     	return $row;
     }
     
+    // gets a user with a certain username
  	public function findWithUsername($username)
     {
     	

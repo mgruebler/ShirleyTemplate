@@ -5,6 +5,7 @@ class Application_Model_Placeholders
     protected $_ID;
     protected $_name;
     protected $_templateID;
+    protected $_englishname;
 
     public function __construct(array $options = null)
     {
@@ -69,7 +70,7 @@ class Application_Model_Placeholders
         return $this->_templateID;
     }
 
-    // set Parameter Name
+    // set Placeholder Name
     public function setName($name)
     {
         $this->_name = (string) $name;
@@ -82,5 +83,17 @@ class Application_Model_Placeholders
         return $this->_name;
     }
 
+	// set Placeholder English Name
+    public function setEnglishname($name)
+    {
+        $this->_name = (string) $name;
+        return $this;
+    }
+
+    // get Placeholder English Name
+    public function getEnglishname()
+    {
+        return $this->_name;
+    }
 }
 
