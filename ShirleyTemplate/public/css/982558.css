@@ -54,6 +54,11 @@ ul
 {
 list-style-type: none;
 }
+
+li.template-link
+{
+	margin-bottom: 5px;
+}
  
 .logo{
 	display: block;
@@ -145,4 +150,12 @@ input[type="submit"]
 h1
 {
 	color: #444;
+}
+
+#back
+{
+	background-image: url(../Images/arrow-back.png);
+	background-repeat: no-repeat;
+	padding-left: 25px;
+	line-height: 20px;
 }
