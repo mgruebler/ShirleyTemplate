@@ -44,45 +44,53 @@ class Application_Model_Template
         return $this;
     }
     
+    // set Template ID
     public function setID($id)
     {
         $this->_ID = (int) $id;
         return $this;
     }
 
+    // get Template ID
     public function getID()
     {
         return $this->_ID;
     }
     
+    // set User ID
     public function setUserID($id)
     {
         $this->_userID = (int) $id;
         return $this;
     }
 
+    // get User ID
     public function getUserID()
     {
         return $this->_userID;
     }
 
+    // set Template Name
     public function setName($name)
     {
         $this->_name = (string) $name;
         return $this;
     }
 
+    // get Template Name
     public function getName()
     {
         return $this->_name;
     }
 
+    // set Template Type
     public function setType($type)
     {
         $this->_type = $type;
         return $this;
     }
 
+    // get Template Type
     public function getType()
     {
         return $this->_type;

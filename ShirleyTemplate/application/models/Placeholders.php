@@ -5,7 +5,7 @@ class Application_Model_Placeholders
     protected $_ID;
     protected $_name;
     protected $_templateID;
-    protected $_type;
+    protected $_type;    protected $_englishname;
 
     public function __construct(array $options = null)
     {
@@ -44,39 +44,58 @@ class Application_Model_Placeholders
         return $this;
     }
     
+    // set Placeholder ID
     public function setID($id)
     {
         $this->_ID = (int) $id;
         return $this;
     }
-
+    
+	// get Placeholder ID
     public function getID()
     {
         return $this->_ID;
     }
     
+    // set Template ID
     public function setTemplateID($id)
     {
         $this->_templateID = (int) $id;
         return $this;
     }
 
+    // get Template ID
     public function getTemplateID()
     {
         return $this->_templateID;
     }
 
+    // set Placeholder Name
     public function setName($name)
     {
         $this->_name = (string) $name;
         return $this;
     }
 
+    // get Placeholder Name
     public function getName()
     {
         return $this->_name;
     }
     
+
+	// set Placeholder English Name
+    public function setEnglishname($name)
+    {
+        $this->_name = (string) $name;
+        return $this;
+    }
+
+    // get Placeholder English Name
+    public function getEnglishname()
+    {
+        return $this->_name;
+    }
 
     public function setType($type)
     {
@@ -88,6 +107,5 @@ class Application_Model_Placeholders
     {
         return $this->_type;
     }
-
 }
 

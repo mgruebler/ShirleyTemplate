@@ -44,34 +44,40 @@ class Application_Model_TemplateFile
         return $this;
     }
     
+    // set File ID
     public function setID($id)
     {
         $this->_ID = (int) $id;
         return $this;
     }
 
+    // get File ID
     public function getID()
     {
         return $this->_ID;
     }
     
+    // set Template ID
     public function setTemplateID($id)
     {
         $this->_templateID = (int) $id;
         return $this;
     }
 
+    // get Template ID
     public function getTemplateID()
     {
         return $this->_templateID;
     }
 
+    // set File name
     public function setName($name)
     {
         $this->_name = (string) $name;
         return $this;
     }
 
+    // get File name
     public function getName()
     {
         return $this->_name;
@@ -88,11 +94,13 @@ class Application_Model_TemplateFile
     	return $this;
     }
     
+    // get File content
     public function getContent()
     {
     	return $this->_content;
     }
     
+    // set File content
     public function setContent($cont)
     {
     	$this->_content = $cont;

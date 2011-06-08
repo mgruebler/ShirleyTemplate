@@ -13,25 +13,13 @@ class Application_Form_Login extends Zend_Form
             'required'   => true,
             'validators' => array(array('validator' => 'StringLength', 'options' => array(6, 20)))
         ));
-	
-		
-	
+
 		// Add the submit button
         $this->addElement('submit', 'submit', array(
             'ignore'   => true,
             'label'    => 'Login!',
 			'class' => 'button'
         ));
-		
-		
-		
-		//<a href="this.form.submit()">Abschicken</a>
-
-
-        // And finally add some CSRF protection
-        //$this->addElement('hash', 'csrf', array(
-        //    'ignore' => true,
-        //));
     }
 }
  

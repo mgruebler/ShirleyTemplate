@@ -24,6 +24,7 @@ class Application_Model_TemplateMapper
         return $this->_dbTable;
     }
 
+    // saves the given Template in the database
     public function save(Application_Model_Template $TemplateFile)
     {
         $data = array(
@@ -40,6 +41,7 @@ class Application_Model_TemplateMapper
         }
     }
 
+    // gets all templates from the database
     public function fetchAll()
     {
     	$templateTable = $this->getDbTable();
@@ -58,6 +60,7 @@ class Application_Model_TemplateMapper
         return $templates;
     }
     
+    
     public function find($id, Application_Model_Template $template)
     {
     	$result = $this->getDbTable()->find($id);
@@ -73,6 +76,7 @@ class Application_Model_TemplateMapper
     			  ->setType($row->type);
     }
 
+    // gets a template with the given ID
     public function fetchWithId($tp_id)
     {
     	$templateTable = $this->getDbTable();

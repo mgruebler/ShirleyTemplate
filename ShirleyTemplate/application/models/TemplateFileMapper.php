@@ -24,6 +24,7 @@ class Application_Model_TemplateFileMapper
         return $this->_dbTable;
     }
 
+    // saves a File into the Database with ID, name, templateID und data (content)
     public function save(Application_Model_TemplateFile $TemplateFile)
     {
         $data = array(
@@ -40,6 +41,7 @@ class Application_Model_TemplateFileMapper
         }
     }
 
+    // gets all Files from the database
     public function fetchAll()
     {
     	$templateTable = $this->getDbTable();
@@ -58,6 +60,7 @@ class Application_Model_TemplateFileMapper
         return $templates;
     }
     
+    // gets a file with the given ID
     public function find($id, Application_Model_TemplateFile $template_file)
     {
     	$result = $this->getDbTable()->find($id);
@@ -73,6 +76,7 @@ class Application_Model_TemplateFileMapper
     				  ->setContent($row->data);
     }
     
+    // gets all Files from one template
     public function getTemplateData($id)
 	{
 		$templateDB = $this->getDbTable();
@@ -94,6 +98,7 @@ class Application_Model_TemplateFileMapper
 		return $files;
     }
     
+    // gets the name of a file with the given ID 
 	public function getFileName($id)
 	{
     	$select = $this->getDbTable()->select();

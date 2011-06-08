@@ -35,6 +35,11 @@ html, body{
  margin-bottom: 1em;
  }
  
+ .contentdata
+ {
+ 	padding-left: 0.5em;
+ }
+ 
 #footer{
  height:0.5%; 
   background-color:#FFFFFF; 

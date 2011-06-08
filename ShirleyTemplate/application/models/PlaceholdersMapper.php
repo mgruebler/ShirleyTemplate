@@ -24,12 +24,14 @@ class Application_Model_PlaceholdersMapper
         return $this->_dbTable;
     }
 
+    // saves a Placeholder with ID, name and templateID in the database
     public function save(Application_Model_Placeholders $placeholder)
     {
         $data = array(
             'name'   => $placeholder->getName(),
             'templateID' => $placeholder->getTemplateID(),
-        	'type' => $placeholder->getType()
+        	'type' => $placeholder->getType(),
+            'englishname' => $placeholders->getEnglishname()
         );
 
         if (null === ($id = $placeholder->getID())) {
@@ -40,6 +42,7 @@ class Application_Model_PlaceholdersMapper
         }
     }
 
+    // gets all Placeholders from the Database
     public function fetchAll()
     {
     	$placeholdersTable = $this->getDbTable();
@@ -52,13 +55,14 @@ class Application_Model_PlaceholdersMapper
             $placeholder->setID($row->ID)
                   ->setName($row->name)
                   ->setTemplateID($row->templateID)
-                  ->setType($row->type);
+                  ->setType($row->type)
+                  ->setEnglishname($row->englishname);
             $placeholders[$row->name] = $placeholder;
         }
         return $placeholders;
     }
     
-    
+	// gets all Placeholders with the given ID 
     public function fetchWithID($tp_id)
     {
     	$placeholderTable = $this->getDbTable();
@@ -71,13 +75,15 @@ class Application_Model_PlaceholdersMapper
             $placeholder->setID($row->ID)
                   ->setName($row->name)
                   ->setTemplateID($row->templateID)
-                  ->setType($row->type);
+                  ->setType($row->type)
+                  ->setEnglishname($row->englishname);
                   $placeholders[$row->name] = $placeholder;
         }
         return $placeholders;
     }
     
- public function fetchWithName($name, $tp_id)
+ 	// gets all Placeholders with a given name and Template ID
+    public function fetchWithName($name, $tp_id)
     {
     	$placeholderTable = $this->getDbTable();
     	$select = $placeholderTable->select();

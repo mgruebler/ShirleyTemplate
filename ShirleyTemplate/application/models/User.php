@@ -46,67 +46,79 @@ class Application_Model_User
         return $this;
     }
     
+    // set User ID
     public function setID($id)
     {
         $this->_ID = (int) $id;
         return $this;
     }
 
+    // get User ID
     public function getID()
     {
         return $this->_ID;
     }
     
+    // set Lastname of the User
     public function setLastname($lastname)
     {
         $this->_lastname = (string) $lastname;
         return $this;
     }
-
+    
+	// get Lastname of the User
     public function getLastname()
     {
         return $this->_lastname;
     }
 
+    // set Firstname of the User
     public function setName($name)
     {
         $this->_name = (string) $name;
         return $this;
     }
 
+    // get Firstname of the User
     public function getName()
     {
         return $this->_name;
     }
 
+    // set Username 
     public function setUsername($name)
     {
         $this->_username = (string) $name;
         return $this;
     }
 
+    // get Username 
     public function getUsername()
     {
         return $this->_username;
     }
 
+    // set the Password 
     public function setPassword($password)
     {
         $this->_password = (string) $password;
         return $this;
     }
 
+    // get the Password
     public function getPassword()
     {
         return $this->_password;
     }
 
+    // set the Email Address
     public function setEmail($email)
     {
         $this->_email = (string) $email;
         return $this;
     }
 
+    // get the Email Address
     public function getEmail()
     {
         return $this->_email;
