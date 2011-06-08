@@ -39,13 +39,15 @@ class AccountController extends Zend_Controller_Action
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			// If the user is logged in, we don't want to show the login form;
 			// however, the logout action should still be available
-			if ('logout' != $this->getRequest()->getActionName()) {
+			if ('logout' != $this->getRequest()->getActionName()
+			&& 'editprofile'!= $this->getRequest()->getActionName() ) {
 				$this->_helper->redirector('index', 'index');
 			}
 		} else {
 			// If they aren't, they can't logout, so that action should
 			// redirect to the login form
-			if ('logout' == $this->getRequest()->getActionName()) {
+			if ('logout' == $this->getRequest()->getActionName()
+			|| 'editprofile' == $this->getRequest()->getActionName() ) {
 				$this->_helper->redirector('index');
 			}
 		}
@@ -166,5 +168,66 @@ class AccountController extends Zend_Controller_Action
 				
         }
  
+    }
+    
+    
+    public function editprofileAction()
+    {
+    	$auth = Zend_Auth::getInstance();
+			
+		$authStorage = $auth->getStorage();
+		if (!$auth->hasIdentity())
+		{
+			$url =array('controller'=>'index', 'action'=>'index');
+			return $this->_helper->redirector->gotoRoute($url);
+		}
+		
+        $request = $this->getRequest();
+        $form = new Application_Form_Register(array('isedit'=> true));
+ 		
+        //$form->email = "test";
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        $usermapper = new Application_Model_UserMapper();
+        $user = $usermapper->findUserWithUsername($identity);
+        
+        $form->password->renderPassword = true;
+        $form->getElement('email')->setValue($user['email']);
+        $form->getElement('username')->setValue($user['username']);
+        $form->getElement('password')->setValue($user['password']);
+        $form->getElement('name')->setValue($user['name']);
+        $form->getElement('lastname')->setValue($user['lastname']);
+        
+ 		$this->view->form = $form;
+ 		
+ 		if ($this->getRequest()->isPost()) 
+		{
+        	$formData = $this->getRequest()->getPost();
+        	
+     	  	if ($form->isValid($formData) ) 
+			{
+            	$email = $form->getValue('email');
+            	$username = $form->getValue('username');
+            	$password = $form->getValue('password');
+            	$name = $form->getValue('name');
+            	$lastname = $form->getValue('lastname');
+            	
+            	
+            	$user_mapper = new Application_Model_UserMapper();
+            	$userid = $user_mapper->findWithUsername($username);
+                     		            	
+            		// Speichern in die Datenbank:  
+            		$user = new Application_Model_User();
+            		$user ->setID($userid)
+            			  ->setName($name)
+		                  ->setLastname($lastname)
+		                  ->setUsername($username)
+		                  ->setPassword($password)
+		                  ->setEmail($email);     
+		          $user_mapper->save($user);
+		        $url =array('controller'=>'index', 'action'=>'index');
+                return $this->_helper->redirector->gotoRoute($url);
+			}
+		}
+		
     }
 }

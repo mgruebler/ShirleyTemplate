@@ -112,4 +112,13 @@ class AccountControllerTest extends ControllerTestCase
         $this->assertRedirectTo('/');
     }
     
+    public function testEditProfileAction()
+    {
+    	$this->loginUser('bernd', 'hirschmann');
+    	
+        $this->dispatch('/account/editprofile');
+        $this->assertController('account');
+        $this->assertAction('editprofile');
+    }
+    
 }
