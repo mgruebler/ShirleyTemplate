@@ -1,6 +1,7 @@
 <?php
 
 require_once 'BaseTestCase.php';
+require_once BASE_PATH . '/application/models/UserMapper.php';
 
 class AccountControllerTest extends ControllerTestCase
 {
@@ -119,6 +120,37 @@ class AccountControllerTest extends ControllerTestCase
         $this->dispatch('/account/editprofile');
         $this->assertController('account');
         $this->assertAction('editprofile');
+    }
+    
+    public function testProfileActionWithoutLoginRedirectToLogin()
+    {
+    	$this->dispatch('/account/editprofile');
+        $this->assertRedirectTo('/');
+    }
+    
+    public function testSucessfulEditProfileAction()
+    {
+    	$this->loginUser('bernd', 'hirschmann');
+    	
+    	$data = array(
+            'username' => 'bernd',
+    	    'password' => 'hirschmann',
+            'email'    => 'katharina@stadlmayr.st',
+    		'name'	   => 'Katharina',
+    		'lastname' => 'Stadlmayr',
+        );
+        $request = $this->getRequest();
+        $request->setMethod('POST')
+                ->setPost($data);
+    	$this->dispatch('/account/editprofile');
+    	
+    	$usermapper = new Application_Model_UserMapper();
+    	$user = $usermapper->findUserWithUsername("bernd");
+    	$this->assertEquals($data['username'], $user->username);
+    	$this->assertEquals($data['password'], $user->password);
+    	$this->assertEquals($data['email'], $user->email);
+    	$this->assertEquals($data['name'], $user->name);
+    	$this->assertEquals($data['lastname'], $user->lastname);
     }
     
 }
