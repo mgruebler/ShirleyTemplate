@@ -27,6 +27,10 @@ class TemplateController extends Zend_Controller_Action
     public function fillinAction()
     {
     	$tp_id = $this->_getParam('templateid');
+    	$template_mapper = new Application_Model_TemplateMapper();
+    	$template = new Application_Model_Template();
+    	$template_mapper->find($tp_id, $template);
+    	$this->view->template = $template;
     	$this->view->tp_id = $tp_id;
     	$placeholders_mapper = new Application_Model_PlaceholdersMapper();
     	$placeholders = $placeholders_mapper->fetchWithID($tp_id);
